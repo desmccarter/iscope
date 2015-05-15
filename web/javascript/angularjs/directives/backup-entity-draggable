@@ -1,0 +1,235 @@
+app.directive("entityDraggable", function($document,$interpolate,$compile) {
+    
+    var entityInstancePos = 0;
+    var entityInstanceId = null;
+    
+    return {
+        restrict: 'A',
+    
+        link: function(scope, elem, attr)
+        {
+            var startX, startY, x = 0, y = 0,
+            start, stop, drag, container;
+            
+            function createEntityInstanceDiv(entityElement){
+                
+                var entityId = $interpolate(entityElement.id)(scope);
+                var entityInstanceClass = entityElement.getAttribute("class");
+                var entityInstanceInnerHtml = entityElement.innerHTML;
+                                
+                function createAttribute(attrName, attrValue, elemContainingAttr)
+                {
+                    var attribute = document.createAttribute(attrName);
+                
+                    if(attrValue!=null)
+                    {
+                        attribute.value = attrValue;
+                    }
+                    
+                    elemContainingAttr.setAttributeNode(attribute);
+                }
+
+                var div = document.createElement("div");
+                
+                createAttribute("id", entityId, div);
+                createAttribute("class", entityElement.getAttribute("class"), div);
+                createAttribute("entity-draggable", null, div);
+                           
+                var divHtml = $interpolate(entityInstanceInnerHtml)(scope);
+
+                div.innerHTML = divHtml;
+                div.offsetHeight = entityElement.offsetHeight;
+                div.offsetWidth = entityElement.offsetWidth;
+                
+                entityElement.parentElement.appendChild(div);
+
+                $compile(divHtml)(scope);
+
+                entityInstanceId = entityId+"Instance"+entityInstancePos; ++entityInstancePos;
+                
+                entityElement.id=entityInstanceId;
+                                
+                return div;
+            }
+            
+            function cloneEntity(entityId, entityElement, originalOffsetLeft, originalOffsetTop) {
+
+                var div = createEntityInstanceDiv(entityElement);
+                
+                div.offsetLeft=originalOffsetLeft;
+                div.offsetTop=originalOffsetTop;
+                
+                // *** note: div is now the entity, entityElement is now the
+                // *** instance from here on ...
+                
+                var startXPos=originalOffsetLeft;
+                var startYPos=originalOffsetTop;
+                
+                var mouseX=0;
+                var mouseY=0;
+                
+                var i=0;
+                var j=0;
+
+                var width  = div.offsetWidth;
+                var height = div.offsetHeight;
+                
+                console.log("h="+height+"w="+width);
+                
+                var mouseMoveClone=false;
+                
+                function mmove(e) {
+                    
+                    var mouseDiffX=e.clientX-mouseX;
+                    var mouseDiffY=e.clientY-mouseY;
+ 
+                    if(!mouseMoveClone)
+                    {
+                        clonedEntity = cloneEntity(entityId,div,originalOffsetLeft,originalOffsetTop);
+                        mouseMoveClone=true;
+                    }
+                    
+                    j = startYPos+mouseDiffY;
+                    i = startXPos+mouseDiffX;
+                
+                    var processedPosition = scope.processEntityPosition(null,null,i,j,width,height);
+              
+                    i = processedPosition.x;
+                    j = processedPosition.y;
+              
+                    console.log("container="+processedPosition.container);
+                                    
+                    $( "#"+div.id ).css({
+                      position: 'absolute',
+                      top: j + 'px',
+                      left:  i + 'px'
+                    });
+                  }
+                
+                function mup(e) {
+              
+                    console.log("entity ID="+entityId+" div id="+div.id);
+                    
+                    var processedPosition = scope.processEntityPosition(entityId,div,i,j,width,height);
+            
+                    i = processedPosition.x;
+                    j = processedPosition.y;
+
+                    startXPos=i;
+                    startYPos=j;
+
+                    if(processedPosition.deleteSelfElement || mouseMoveClone)
+                    {
+                        div.parentElement.removeChild(div);
+                    }
+              
+                    mouseMoveClone=false;
+                    
+                    $document.unbind('mousemove', mmove);
+                    $document.unbind('mouseup', mup);
+                  }
+                
+                $( "#"+div.id ).on( "mousedown", function(e) {
+                    e.preventDefault();
+                    
+                    mouseX=e.clientX;
+                    mouseY=e.clientY;
+                    
+                    startXPos = div.offsetLeft;
+                    startYPos = div.offsetTop;
+                    
+                    mouseMoveClone=false;
+                    
+                    $document.on('mousemove', mmove);
+                    $document.on('mouseup', mup);
+                });
+                
+                return div;
+            }
+            
+            var width  = elem[0].offsetWidth
+            var height = elem[0].offsetHeight;
+            
+            var mouseXPos=0;
+            var mouseYPos=0;
+            
+            var elementXPos=elem[0].offsetLeft;
+            var elementYPos=elem[0].offsetTop;
+            
+            var originalOffsetLeft=elementXPos;
+            var originalOffsetTop=elementXPos;
+            
+            var mouseMoved=false;
+            
+            // Bind mousedown event
+            elem.on('mousedown', function(e) {
+                
+                mouseMoved=false;
+
+                e.preventDefault();
+
+                mouseXPos = e.clientX;
+                mouseYPos = e.clientY;
+
+                $document.on('mousemove', mousemove);
+                $document.on('mouseup', mouseup);
+              });
+            
+        var created=false;
+                    
+        var entityId=$interpolate(elem[0].id)(scope);
+            
+        
+          function mousemove(e) {
+              
+            var clonedEntity = null;
+                
+            if(!mouseMoved)
+            {
+                clonedEntity = cloneEntity(entityId,elem[0],originalOffsetLeft,originalOffsetTop);              
+                mouseMoved=true;
+            }
+              
+            y = elementYPos +(e.clientY - mouseYPos);
+            x = elementXPos +(e.clientX - mouseXPos);
+              
+            var processedPosition = scope.processEntityPosition(null,null,x,y,width,height);
+              
+            x = processedPosition.x;
+            y = processedPosition.y;
+              
+              
+                    console.log("container="+processedPosition.container);
+              
+            elem.css({
+                  position: 'absolute',
+                  top: y + 'px',
+                  left:  x + 'px'
+                });
+          }
+
+          function mouseup(e) {
+              
+                                  console.log("*****entity ID="+entityId+" div id="+elem[0].id);
+                    
+            var processedPosition = scope.processEntityPosition(entityId,elem[0],x,y,width,height);
+            
+            x = processedPosition.x;
+            y = processedPosition.y;
+              
+            elementXPos=x;
+            elementYPos=y;
+              
+            if(processedPosition.deleteSelfElement || mouseMoved)
+            {
+                elem[0].parentElement.removeChild(elem[0]);
+            }
+                            
+            mouseMoved=false;
+              
+            $document.unbind('mousemove', mousemove);
+            $document.unbind('mouseup', mouseup);
+          }
+        }
+    }
+});

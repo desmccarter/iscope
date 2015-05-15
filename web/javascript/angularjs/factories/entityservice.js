@@ -2,6 +2,26 @@ app.service("entityservice",function(){
     
     var entities = [
         { 
+            name: 'user', 
+            src: 'images/icons/user.jpg', 
+            classType: 'classuser',
+            
+            inputs: [
+            {
+                name: "username",
+                value: ""
+            },
+            {
+                name: "password",
+                value: ""
+            },
+            {
+                name: "domain",
+                value: "DOMAIN"
+            }]
+        },
+        
+        { 
             name: 'database', 
             src: 'images/icons/database.jpg', 
             classType: 'classdatabase',

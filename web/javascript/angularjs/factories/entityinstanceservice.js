@@ -71,9 +71,9 @@ var entityInputs = [];
     
     this.createEntityInstance = function(entityInstance){
         
-        var copyOfInstance = angular.copy(entityInstance);
+        //var copyOfInstance = angular.copy(entityInstance);
         
-        entityInstances.push(copyOfInstance);
+        entityInstances.push(entityInstance);
     }
     
     this.getEntityImage = function(id){
