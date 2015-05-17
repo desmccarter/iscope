@@ -1,11 +1,14 @@
 package com.iscope.rest;
 
+import java.net.UnknownHostException;
+
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
+
 import com.iscope.mongodb.*;
 
 @Path("getentity")
@@ -24,7 +27,18 @@ public class GetEntity {
 	        	String entityId=id;
 	        	
 	            String output = "Entity ID = " + entityId;
-	
+	            
+	            EntityDB entityDb=null;
+	            
+	            try {
+					entityDb = new EntityDB();
+				} catch (UnknownHostException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+	            
+	            output=entityDb.getEntityByName(entityId);
+	            
 	        	return Response.status(200).entity(output).build();
         	}
         	else
