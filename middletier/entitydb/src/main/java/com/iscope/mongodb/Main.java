@@ -35,19 +35,8 @@ public class Main {
 	public static void main(String[] args) throws UnknownHostException {
 		
 		EntityDB entityDb = new EntityDB();
+
 		
-		entityDb.insertEntity("database","images/icons/database.jpg");
-				
-		entityDb.insertEntity("queue", "images/icons/queue.png");
-        
-		entityDb.insertEntity("file", "images/icons/fileserver.png");
-        
-		entityDb.insertEntity("api", "images/icons/api.png");
- 
-		entityDb.insertEntity("service", "images/icons/service.png");
-				
-		entityDb.showEntityByName("service");
-		
-		System.out.println("hello mum!");
+		System.out.println(entityDb.getEntityByName("database"));
 	}
 }

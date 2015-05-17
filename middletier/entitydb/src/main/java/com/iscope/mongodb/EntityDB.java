@@ -2,6 +2,7 @@ package com.iscope.mongodb;
 
 import java.net.UnknownHostException;
 
+import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -21,6 +22,28 @@ public class EntityDB {
 	public EntityDB() throws UnknownHostException {
 		mongo = new MongoClient("localhost",27017);
 		db = mongo.getDB(dbName);
+		
+		removeAllEntities();
+		
+		BasicDBObject record = 
+				new BasicDBObject("_id","database").append("name","database")
+				.append("src", "images/icons/database.jpg");
+						
+		BasicDBList inputsList = new BasicDBList();
+		
+		inputsList.add(new BasicDBObject("username","").append("password", "").append("domain", "DOMAIN"));
+		
+		record.put("inputs", inputsList);
+		
+		insertEntity("database",record);
+		
+		insertEntity("queue", "images/icons/queue.png");
+        
+		insertEntity("file", "images/icons/fileserver.png");
+        
+		insertEntity("api", "images/icons/api.png");
+ 
+		insertEntity("service", "images/icons/service.png");
 	}
 	
 	private boolean entityExists(String entityName) {
@@ -39,6 +62,16 @@ public class EntityDB {
 	{
 		DBCollection col = db.getCollection(dbCollectionName);
 		col.drop();
+	}
+	
+	public void insertEntity(String id, BasicDBObject data)
+	{
+		DBCollection col = db.getCollection(dbCollectionName);
+		
+		if( !entityExists(id) ) 
+		{
+			col.insert(data);
+		}
 	}
 	
 	public void insertEntity(String name, String imgSrc) {
@@ -75,5 +108,23 @@ public class EntityDB {
 		while(cursor.hasNext()) {
 		    System.out.println(cursor.next());
 		}
+	}
+	
+	public String getEntityByName(String name) {
+		
+		BasicDBObject whereQuery = new BasicDBObject();
+		whereQuery.put("name", name);
+
+		DBCollection col = db.getCollection(dbCollectionName);
+		
+		DBCursor cursor = col.find(whereQuery);
+		
+		String entity = null;
+		
+		if(cursor.hasNext()) {
+		    entity=cursor.next().toString();
+		}
+		
+		return entity;
 	}
 }
