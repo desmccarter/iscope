@@ -6,6 +6,8 @@ package com.iscope.mongodb;
 import java.net.UnknownHostException;
 import java.util.List;
 
+import com.mongodb.BasicDBList;
+import com.mongodb.BasicDBObject;
 import com.mongodb.BasicDBObjectBuilder;
 import com.mongodb.DB;
 import com.mongodb.DBCollection;
@@ -34,9 +36,39 @@ public class Main {
 	 */
 	public static void main(String[] args) throws UnknownHostException {
 		
-		EntityDB entityDb = new EntityDB();
-
+	}
+	
+	private static void createEntityEntries(){
 		
-		System.out.println(entityDb.getEntityByName("database"));
+		BasicDBObject record = 
+				new BasicDBObject("_id","database").append("name","database")
+				.append("src", "images/icons/database.jpg");
+		
+
+		try {
+			EntityDB entityDb = new EntityDB();
+		
+			entityDb.removeAllEntities();
+			
+			BasicDBList inputsList = new BasicDBList();
+			
+			inputsList.add(new BasicDBObject("username","").append("password", "").append("domain", "DOMAIN"));
+			
+			record.put("inputs", inputsList);
+			
+			entityDb.insertEntity("database",record);
+			
+			entityDb.insertEntity("queue", "images/icons/queue.png");
+	        
+			entityDb.insertEntity("file", "images/icons/fileserver.png");
+	        
+			entityDb.insertEntity("api", "images/icons/api.png");
+	 
+			entityDb.insertEntity("service", "images/icons/service.png");
+			
+		} catch (UnknownHostException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }

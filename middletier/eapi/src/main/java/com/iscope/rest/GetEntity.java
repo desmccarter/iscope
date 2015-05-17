@@ -19,15 +19,31 @@ public class GetEntity {
     public Response responseMsg( @PathParam("parameter") String parameter,
             @DefaultValue("Not given") @QueryParam("id") String id) {
  
-
-        if( (id!=null) && (id.length()>0) )
-		{
-        	if( (parameter!=null) && (parameter.length()>0) && (parameter.equals("entity")) )
-        	{
-	        	String entityId=id;
-	        	
-	            String output = "Entity ID = " + entityId;
-	            
+    	if( (parameter!=null) && (parameter.length()>0) )
+    	{
+    		String output="";
+    		
+    		if(parameter.equals("entity"))
+    		{
+	    	    if( (id!=null) && (id.length()>0) )
+	    		{
+		        	String entityId=id;
+		        	    
+		            EntityDB entityDb=null;
+		            
+		            try {
+						entityDb = new EntityDB();
+					} catch (UnknownHostException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+		            
+		            output=entityDb.getEntityByName(entityId);
+	    		}
+    		}
+    		else
+    		if(parameter.equals("all"))
+    		{
 	            EntityDB entityDb=null;
 	            
 	            try {
@@ -37,18 +53,14 @@ public class GetEntity {
 					e.printStackTrace();
 				}
 	            
-	            output=entityDb.getEntityByName(entityId);
-	            
-	        	return Response.status(200).entity(output).build();
-        	}
-        	else
-        	{
-            	return Response.status(400).entity("Parameter not given").build();
-        	}
-		}
-        else
-        {
-        	return Response.status(400).entity("Value required").build();
-        }
+	            output=entityDb.getAllEntities();    			
+    		}
+    	       
+        	return Response.status(200).entity(output).build();
+    	}
+    	else
+    	{
+        	return Response.status(400).entity("Parameter not given").build();
+    	}
     }
 }

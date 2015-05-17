@@ -22,28 +22,6 @@ public class EntityDB {
 	public EntityDB() throws UnknownHostException {
 		mongo = new MongoClient("localhost",27017);
 		db = mongo.getDB(dbName);
-		
-		removeAllEntities();
-		
-		BasicDBObject record = 
-				new BasicDBObject("_id","database").append("name","database")
-				.append("src", "images/icons/database.jpg");
-						
-		BasicDBList inputsList = new BasicDBList();
-		
-		inputsList.add(new BasicDBObject("username","").append("password", "").append("domain", "DOMAIN"));
-		
-		record.put("inputs", inputsList);
-		
-		insertEntity("database",record);
-		
-		insertEntity("queue", "images/icons/queue.png");
-        
-		insertEntity("file", "images/icons/fileserver.png");
-        
-		insertEntity("api", "images/icons/api.png");
- 
-		insertEntity("service", "images/icons/service.png");
 	}
 	
 	private boolean entityExists(String entityName) {
@@ -126,5 +104,20 @@ public class EntityDB {
 		}
 		
 		return entity;
+	}
+	
+	public String getAllEntities() {
+		
+		DBCollection col = db.getCollection(dbCollectionName);
+		
+		DBCursor cursor = col.find();
+				
+		BasicDBList dbList = new BasicDBList();
+		
+		while(cursor.hasNext()) {
+			dbList.add(cursor.next());
+		}
+		
+		return dbList.toString();
 	}
 }
