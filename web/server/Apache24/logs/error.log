@@ -1,0 +1,90 @@
+[Sun May 17 20:31:55.423009 2015] [ssl:warn] [pid 39940:tid 332] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:31:55.733027 2015] [ssl:warn] [pid 39940:tid 332] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:31:55.734027 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH00455: Apache/2.4.12 (Win32) OpenSSL/1.0.1m configured -- resuming normal operations
+[Sun May 17 20:31:55.734027 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH00456: Server built: Mar 19 2015 18:23:40
+[Sun May 17 20:31:55.734027 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH80000: Distributed by: The Apache Haus
+[Sun May 17 20:31:55.734027 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH80001: Compiled with: Visual Studio 2008
+[Sun May 17 20:31:55.734027 2015] [core:notice] [pid 39940:tid 332] AH00094: Command line: 'httpd -d C:/Users/mccarterd/OneDrive/Documents/projects/iscope/web/server/Apache24'
+[Sun May 17 20:31:55.738027 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH00418: Parent: Created child process 42856
+Apache server interrupted...
+015] [ssl:warn] [pid 42856:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:31:56.902094 2015] [ssl:warn] [pid 42856:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:31:56.937096 2015] [mpm_winnt:notice] [pid 42856:tid 344] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 20:56:17.399629 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 20:56:19.400744 2015] [mpm_winnt:notice] [pid 42856:tid 344] AH00364: Child: All worker threads have exited.
+[Sun May 17 20:56:19.431745 2015] [mpm_winnt:notice] [pid 39940:tid 332] AH00430: Parent: Child process 42856 exited successfully.
+[Sun May 17 20:57:40.781398 2015] [ssl:warn] [pid 46424:tid 332] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:57:41.026412 2015] [ssl:warn] [pid 46424:tid 332] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:57:41.026412 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH00455: Apache/2.4.12 (Win32) OpenSSL/1.0.1m configured -- resuming normal operations
+[Sun May 17 20:57:41.026412 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH00456: Server built: Mar 19 2015 18:23:40
+[Sun May 17 20:57:41.026412 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH80000: Distributed by: The Apache Haus
+[Sun May 17 20:57:41.026412 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH80001: Compiled with: Visual Studio 2008
+[Sun May 17 20:57:41.026412 2015] [core:notice] [pid 46424:tid 332] AH00094: Command line: 'httpd -d C:/Users/mccarterd/OneDrive/Documents/projects/iscope/web/server/Apache24'
+[Sun May 17 20:57:41.029413 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH00418: Parent: Created child process 45068
+Apache server interrupted...
+015] [ssl:warn] [pid 45068:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:57:42.021469 2015] [ssl:warn] [pid 45068:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 20:57:42.024470 2015] [mpm_winnt:notice] [pid 45068:tid 344] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 21:13:56.894229 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 21:13:58.896343 2015] [mpm_winnt:notice] [pid 45068:tid 344] AH00364: Child: All worker threads have exited.
+[Sun May 17 21:13:58.927345 2015] [mpm_winnt:notice] [pid 46424:tid 332] AH00430: Parent: Child process 45068 exited successfully.
+[Sun May 17 21:28:26.810985 2015] [ssl:warn] [pid 46108:tid 332] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:28:27.085001 2015] [ssl:warn] [pid 46108:tid 332] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:28:27.085001 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH00455: Apache/2.4.12 (Win32) OpenSSL/1.0.1m configured -- resuming normal operations
+[Sun May 17 21:28:27.086001 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH00456: Server built: Mar 19 2015 18:23:40
+[Sun May 17 21:28:27.086001 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH80000: Distributed by: The Apache Haus
+[Sun May 17 21:28:27.086001 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH80001: Compiled with: Visual Studio 2008
+[Sun May 17 21:28:27.086001 2015] [core:notice] [pid 46108:tid 332] AH00094: Command line: 'httpd -d C:/Users/mccarterd/OneDrive/Documents/projects/iscope/web/server/Apache24'
+[Sun May 17 21:28:27.088001 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH00418: Parent: Created child process 46848
+Apache server interrupted...
+015] [ssl:warn] [pid 46848:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:28:28.064057 2015] [ssl:warn] [pid 46848:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:28:28.067057 2015] [mpm_winnt:notice] [pid 46848:tid 344] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 21:39:27.675785 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 21:39:29.676899 2015] [mpm_winnt:notice] [pid 46848:tid 344] AH00364: Child: All worker threads have exited.
+[Sun May 17 21:39:29.702901 2015] [mpm_winnt:notice] [pid 46108:tid 332] AH00430: Parent: Child process 46848 exited successfully.
+[Sun May 17 21:47:01.735755 2015] [ssl:warn] [pid 47208:tid 336] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:47:01.972769 2015] [ssl:warn] [pid 47208:tid 336] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:47:01.972769 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH00455: Apache/2.4.12 (Win32) OpenSSL/1.0.1m configured -- resuming normal operations
+[Sun May 17 21:47:01.972769 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH00456: Server built: Mar 19 2015 18:23:40
+[Sun May 17 21:47:01.972769 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH80000: Distributed by: The Apache Haus
+[Sun May 17 21:47:01.972769 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH80001: Compiled with: Visual Studio 2008
+[Sun May 17 21:47:01.972769 2015] [core:notice] [pid 47208:tid 336] AH00094: Command line: 'httpd -d C:/Users/mccarterd/OneDrive/Documents/projects/iscope/web/server/Apache24'
+[Sun May 17 21:47:01.975769 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH00418: Parent: Created child process 47592
+Apache server interrupted...
+015] [ssl:warn] [pid 47592:tid 348] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:47:03.042830 2015] [ssl:warn] [pid 47592:tid 348] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:47:03.046830 2015] [mpm_winnt:notice] [pid 47592:tid 348] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 21:48:21.978345 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 21:48:23.980459 2015] [mpm_winnt:notice] [pid 47592:tid 348] AH00364: Child: All worker threads have exited.
+[Sun May 17 21:48:24.009461 2015] [mpm_winnt:notice] [pid 47208:tid 336] AH00430: Parent: Child process 47592 exited successfully.
+[Sun May 17 21:48:26.126582 2015] [ssl:warn] [pid 47196:tid 336] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:48:26.450601 2015] [ssl:warn] [pid 47196:tid 336] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:48:26.450601 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH00455: Apache/2.4.12 (Win32) OpenSSL/1.0.1m configured -- resuming normal operations
+[Sun May 17 21:48:26.450601 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH00456: Server built: Mar 19 2015 18:23:40
+[Sun May 17 21:48:26.450601 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH80000: Distributed by: The Apache Haus
+[Sun May 17 21:48:26.450601 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH80001: Compiled with: Visual Studio 2008
+[Sun May 17 21:48:26.450601 2015] [core:notice] [pid 47196:tid 336] AH00094: Command line: 'httpd -d C:/Users/mccarterd/OneDrive/Documents/projects/iscope/web/server/Apache24'
+[Sun May 17 21:48:26.455601 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH00418: Parent: Created child process 45512
+Apache server interrupted...
+015] [ssl:warn] [pid 45512:tid 348] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:48:27.483660 2015] [ssl:warn] [pid 45512:tid 348] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Sun May 17 21:48:27.487660 2015] [mpm_winnt:notice] [pid 45512:tid 348] AH00354: Child: Starting 64 worker threads.
+[Sun May 17 21:49:30.549267 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Sun May 17 21:49:32.549381 2015] [mpm_winnt:notice] [pid 45512:tid 348] AH00364: Child: All worker threads have exited.
+[Sun May 17 21:49:32.571383 2015] [mpm_winnt:notice] [pid 47196:tid 336] AH00430: Parent: Child process 45512 exited successfully.
+[Mon May 18 03:51:34.189312 2015] [ssl:warn] [pid 10268:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Mon May 18 03:51:34.428325 2015] [ssl:warn] [pid 10268:tid 344] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Mon May 18 03:51:34.428325 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH00455: Apache/2.4.12 (Win32) OpenSSL/1.0.1m configured -- resuming normal operations
+[Mon May 18 03:51:34.428325 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH00456: Server built: Mar 19 2015 18:23:40
+[Mon May 18 03:51:34.428325 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH80000: Distributed by: The Apache Haus
+[Mon May 18 03:51:34.428325 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH80001: Compiled with: Visual Studio 2008
+[Mon May 18 03:51:34.428325 2015] [core:notice] [pid 10268:tid 344] AH00094: Command line: 'httpd -d C:/Users/mccarterd/OneDrive/Documents/projects/iscope/web/server/Apache24'
+[Mon May 18 03:51:34.431326 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH00418: Parent: Created child process 43864
+Apache server interrupted...
+015] [ssl:warn] [pid 43864:tid 356] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Mon May 18 03:51:35.426382 2015] [ssl:warn] [pid 43864:tid 356] AH01909: localhost:443:0 server certificate does NOT include an ID which matches the server name
+[Mon May 18 03:51:35.430383 2015] [mpm_winnt:notice] [pid 43864:tid 356] AH00354: Child: Starting 64 worker threads.
+[Mon May 18 05:36:26.227196 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH00422: Parent: Received shutdown signal -- Shutting down the server.
+[Mon May 18 05:36:28.228310 2015] [mpm_winnt:notice] [pid 43864:tid 356] AH00364: Child: All worker threads have exited.
+[Mon May 18 05:36:28.262312 2015] [mpm_winnt:notice] [pid 10268:tid 344] AH00430: Parent: Child process 43864 exited successfully.
