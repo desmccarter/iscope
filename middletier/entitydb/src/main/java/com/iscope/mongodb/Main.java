@@ -7,7 +7,6 @@ import java.net.UnknownHostException;
 
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
-import com.iscope.mongodb.EntityDB;
 
 /**
  * @author Des.McCarter
@@ -20,7 +19,7 @@ public class Main {
 	 * @throws UnknownHostException 
 	 */
 	public static void main(String[] args) throws UnknownHostException {
-		//createEntityEntries();
+		createEntityEntries();
 	}
 	
 	private static void createEntityEntries(){
