@@ -10,3 +10,8 @@ Once cloned you will need to run your mongoDB server as:
 1. cd iscope/database
 2. mongod --dbpath .
 
+To test the rest service then:
+
+a. Insert some entity data into mongodb.
+b. Do the following in the browser: http://localhost:8082/eapi/getentity/all
+c. Do the following in the browers to test getting individual entity: http://localhost:8082/eapi/getentity/entity?id=database
