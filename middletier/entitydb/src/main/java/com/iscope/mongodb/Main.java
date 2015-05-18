@@ -19,7 +19,7 @@ public class Main {
 	 * @throws UnknownHostException 
 	 */
 	public static void main(String[] args) throws UnknownHostException {
-		//createEntityEntries();
+		createEntityEntries();
 	}
 	
 	private static void createEntityEntries(){
