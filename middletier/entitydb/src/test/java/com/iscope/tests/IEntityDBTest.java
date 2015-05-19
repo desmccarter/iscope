@@ -13,6 +13,8 @@ import com.iscope.db.IEntityDB;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 
+// comment
+
 public class IEntityDBTest extends TestCase {
 	
 	IEntityDB db = null;
