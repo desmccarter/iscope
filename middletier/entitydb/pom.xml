@@ -8,22 +8,16 @@
   <name>entitydb</name>
   <url>http://maven.apache.org</url>
   <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>3.8.1</version>
-      <scope>test</scope>
-    </dependency>
+	<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.8.1</version>
+		<scope>test</scope>
+	</dependency>
 	<dependency> 
 		<groupId>org.mongodb</groupId> 
 		<artifactId>mongo-java-driver</artifactId> 
 		<version>2.12.3</version> 
-	</dependency>
-	<dependency>
-		  <groupId>org.easymock</groupId>
-		  <artifactId>easymock</artifactId>
-		  <version>3.3.1</version>
-		  <scope>test</scope>
 	</dependency>
   </dependencies>
 </project>
