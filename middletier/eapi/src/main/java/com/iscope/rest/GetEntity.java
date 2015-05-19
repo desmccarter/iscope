@@ -56,7 +56,8 @@ public class GetEntity {
 	            output=entityDb.getAllEntities();    			
     		}
     		
-    		// *** prepare response ...
+    		// *** prepare 
+    		// response ...
     		Response resp = Response.status(200).entity(output).build();
     		
     		resp.getHeaders().add("Allow-Control-Allow-Origin","http://localhost");
