@@ -30,6 +30,17 @@ public class IEntityDBTest extends TestCase {
 		int a=1;
 		int b=2;
 		
-		Assert.assertEquals(a+b, 3);
+		Assert.assertEquals(3,a+b);
+	}
+	
+	@Test
+	public void testAnotherGetEntity() {
+		//expect(db.getEntityByName("database")).andReturn("{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"username\" : \"\" , \"password\" : \"\" , \"domain\" : \"DOMAIN\"}]}");
+		//replay(db);
+		
+		int a=3;
+		int b=2;
+		
+		Assert.assertEquals(5,a+b);
 	}
 }
