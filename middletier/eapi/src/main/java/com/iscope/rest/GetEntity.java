@@ -38,6 +38,8 @@ public class GetEntity {
 						e.printStackTrace();
 					}
 		            
+		            System.out.println("*** called.");
+		            
 		            output=entityDb.getEntityByName(entityId);
 	    		}
     		}
@@ -55,8 +57,13 @@ public class GetEntity {
 	            
 	            output=entityDb.getAllEntities();    			
     		}
+    		
+    		Response resp = Response.status(200).entity(output).build();
     	       
-        	return Response.status(200).entity(output).build();
+    		
+    		resp.getHeaders().add("Access-Control-Allow-Origin", "http://localhost");
+    		
+        	return resp;
     	}
     	else
     	{
