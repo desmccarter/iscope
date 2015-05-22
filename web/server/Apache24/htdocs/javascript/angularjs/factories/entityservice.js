@@ -1,4 +1,6 @@
 app.service("entityservice",function(){
+
+    var restApi = "http://localhost:8081/eapi";
     
     var entities = [];
          
@@ -7,15 +9,15 @@ app.service("entityservice",function(){
         if(entities.length==0)
         {
             $.ajax({
-                url: "http://localhost:8080/eapi/getentity/all",
-                dataType: 'jsonp',
+                url: restApi+"/getentity/all",
+                dataType: 'json',
+                async: false,
                 success: function(data) {
                     entities=data;
-                }
-                
+                }        
             });
         }
-        
+   
         return entities;
     }
     
@@ -23,11 +25,13 @@ app.service("entityservice",function(){
         
         var ret=null;
         
-        for(var i=0; i<entities.length; i++)
+        for(var i=0; i<this.getAllEntities().length; i++)
         {
-            if( entities[i].name == id )
+            var entity = this.getAllEntities()[i];
+            
+            if( entity.name == id )
             {
-                ret=entities[i]; break;
+                ret=entity; break;
             }
         }
         
