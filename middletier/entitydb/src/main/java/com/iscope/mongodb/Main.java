@@ -24,15 +24,29 @@ public class Main {
 	
 	private static void createEntityEntries(){
 		
-		BasicDBObject record = 
-				new BasicDBObject("_id","database").append("name","database")
-				.append("src", "images/icons/database.jpg");
+
 		
 
 		try {
 			EntityDB entityDb = new EntityDB();
 		
 			entityDb.removeAllEntities();
+			
+			BasicDBObject userRecord = 
+					new BasicDBObject("_id","user").append("name","user")
+					.append("src", "images/icons/user.jpg");
+			
+			BasicDBList userInputsList = new BasicDBList();
+			
+			userInputsList.add(new BasicDBObject("url","").append("username", "").append("password", ""));
+			
+			userRecord.put("inputs", userInputsList);
+			
+			entityDb.insertEntity("user",userRecord);
+			
+			BasicDBObject record = 
+					new BasicDBObject("_id","database").append("name","database")
+					.append("src", "images/icons/database.jpg");
 			
 			BasicDBList inputsList = new BasicDBList();
 			
