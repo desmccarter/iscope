@@ -11,6 +11,13 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
     $scope.entityLinks = [];
     
     $scope.testVar="test is a test";
+    
+    $scope.getAllEntities = function() {
+        
+        $scope.entities=entityservice.getAllEntities();
+                
+        return $scope.entities;
+    }
 
     $scope.addEntityLink = function(id, fromX, fromY, toX, toY, angle, sourceId, targetId){
         
