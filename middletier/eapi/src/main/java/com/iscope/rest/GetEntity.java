@@ -9,7 +9,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import com.iscope.mongodb.*;
+import com.iscope.db.*;
 
 @Path("getentity")
 public class GetEntity {
@@ -29,10 +29,10 @@ public class GetEntity {
 	    		{
 		        	String entityId=id;
 		        	    
-		            EntityDB entityDb=null;
+		            EntityMongo entityDb=null;
 		            
 		            try {
-						entityDb = new EntityDB();
+						entityDb = new EntityMongo();
 					} catch (UnknownHostException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -46,10 +46,10 @@ public class GetEntity {
     		else
     		if(parameter.equals("all"))
     		{
-	            EntityDB entityDb=null;
+	            EntityMongo entityDb=null;
 	            
 	            try {
-					entityDb = new EntityDB();
+					entityDb = new EntityMongo();
 				} catch (UnknownHostException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -58,8 +58,7 @@ public class GetEntity {
 	            output=entityDb.getAllEntities();    			
     		}
     		
-    		Response resp = Response.status(200).entity(output).build();
-    	       
+    		Response resp = Response.status(200).entity(output).build();    	       
     		
     		resp.getHeaders().add("Access-Control-Allow-Origin", "http://localhost");
     		
