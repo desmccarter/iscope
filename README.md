@@ -5,10 +5,17 @@ This is the iScope repository created by Des McCarter. There are two main folder
 1. web - the frontend section made up of javascript/angular/HTML5 scripts and files.
 2. middletier - the entity API plus database code
 
-Once cloned you will need to run your mongoDB server as:
+Once cloned you will need to run your mongoDB server as follows:
 
-1. cd iscope/database
+1. cd iscope/database/mongodb
 2. mongod --dbpath .
+
+Next you need to run the HTTP server as follows:
+
+1. cd iscope/web/server/Apache24/bin
+2. httpd
+
+Finally, you will need to run the entity server which, at the moment (I will need to create a script to run this formally), is in eapi/src/main/java/com/iscope/rest/Main.java.
 
 To test the rest service then:
 
