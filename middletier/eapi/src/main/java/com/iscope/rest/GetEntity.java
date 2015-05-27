@@ -9,7 +9,8 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import com.iscope.db.*;
+import com.iscope.rest.entity.ProcessAll;
+import com.iscope.rest.entity.ProcessEntity;
 
 @Path("getentity")
 public class GetEntity {
@@ -25,37 +26,12 @@ public class GetEntity {
     		
     		if(parameter.equals("entity"))
     		{
-	    	    if( (id!=null) && (id.length()>0) )
-	    		{
-		        	String entityId=id;
-		        	    
-		            EntityMongo entityDb=null;
-		            
-		            try {
-						entityDb = new EntityMongo();
-					} catch (UnknownHostException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
-		            
-		            System.out.println("*** called.");
-		            
-		            output=entityDb.getEntityByName(entityId);
-	    		}
+    			output=ProcessEntity.get(id);
     		}
     		else
     		if(parameter.equals("all"))
-    		{
-	            EntityMongo entityDb=null;
-	            
-	            try {
-					entityDb = new EntityMongo();
-				} catch (UnknownHostException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-	            
-	            output=entityDb.getAllEntities();    			
+    		{   
+	            output=ProcessAll.get();    			
     		}
     		
     		Response resp = Response.status(200).entity(output).build();    	       
