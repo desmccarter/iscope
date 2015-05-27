@@ -20,4 +20,10 @@
 		<version>2.12.3</version> 
 	</dependency>
   </dependencies>
+    <distributionManagement>
+    <site>
+      <id>localhost</id>
+      <url>scp://localhost</url>
+    </site>
+  </distributionManagement>
 </project>
