@@ -1,6 +1,6 @@
 app.service("entityservice",function(){
 
-    var restApi = "http://localhost:8081/eapi";
+    var restApi = "http://localhost:8082/eapi";
     
     var entities = [];
          
