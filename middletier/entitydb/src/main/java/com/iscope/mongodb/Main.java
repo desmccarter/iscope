@@ -5,6 +5,7 @@ package com.iscope.mongodb;
 
 import java.net.UnknownHostException;
 
+import com.iscope.db.EntityMongo;
 import com.mongodb.BasicDBList;
 import com.mongodb.BasicDBObject;
 
@@ -24,11 +25,8 @@ public class Main {
 	
 	private static void createEntityEntries(){
 		
-
-		
-
 		try {
-			EntityDB entityDb = new EntityDB();
+			EntityMongo entityDb = new EntityMongo();
 		
 			entityDb.removeAllEntities();
 			
