@@ -6,19 +6,13 @@ import junit.framework.Assert;
 
 import org.junit.Test;
 
-import static org.easymock.EasyMock.*;
-
-import org.easymock.*;
-import org.junit.Rule;
-import org.junit.Test;
 
 import com.iscope.db.EntityMongo;
 import com.iscope.db.IEntityDB;
 import com.iscope.rest.entity.LocateEntity;
 import com.iscope.rest.entity.LocateEntityEnum;
 
-public class LocateEntityTest extends EasyMockSupport {
-
+public class LocateEntityTest {
  
     private final LocateEntity locateEntity = new LocateEntity();
 	
