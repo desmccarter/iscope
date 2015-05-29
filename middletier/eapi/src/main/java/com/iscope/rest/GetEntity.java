@@ -9,29 +9,38 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Response;
 
-import com.iscope.rest.entity.ProcessAll;
-import com.iscope.rest.entity.ProcessEntity;
+import com.iscope.db.EntityMongo;
+import com.iscope.rest.entity.LocateEntity;
+import com.iscope.rest.entity.LocateEntityEnum;
 
 @Path("getentity")
 public class GetEntity {
+	
+	private LocateEntity locateEntity=new LocateEntity();
     
     @GET
     @Path("/{parameter}")
     public Response responseMsg( @PathParam("parameter") String parameter,
             @DefaultValue("Not given") @QueryParam("id") String id) {
  
+		try {
+			locateEntity.setDB( new EntityMongo() );
+		} catch (UnknownHostException e) {
+			e.printStackTrace();
+		}
+    	
     	if( (parameter!=null) && (parameter.length()>0) )
     	{
     		String output="";
     		
     		if(parameter.equals("entity"))
     		{
-    			output=ProcessEntity.get(id);
+    			output=locateEntity.get(LocateEntityEnum.SearchBySpecificName, id);
     		}
     		else
     		if(parameter.equals("all"))
     		{   
-	            output=ProcessAll.get();    			
+	            output=locateEntity.get(LocateEntityEnum.SearchAll, null);    			
     		}
     		
     		Response resp = Response.status(200).entity(output).build();    	       
