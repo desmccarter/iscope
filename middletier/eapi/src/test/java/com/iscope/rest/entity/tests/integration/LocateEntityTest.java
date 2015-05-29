@@ -21,7 +21,7 @@ public class LocateEntityTest {
 		
 		String expectedJSON = "{ \"_id\" : \"queue\" , \"name\" : \"queue\" , \"src\" : \"images/icons/queue.png\"}";
 		
-		testMongoResponse("queue", expectedJSON);
+		testMongoResponse("database", expectedJSON);
 	}
 	
 	@Test
