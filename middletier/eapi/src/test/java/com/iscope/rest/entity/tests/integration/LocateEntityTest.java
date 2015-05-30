@@ -15,7 +15,23 @@ import com.iscope.rest.entity.LocateEntityEnum;
 public class LocateEntityTest {
  
     private final LocateEntity locateEntity = new LocateEntity();
-	
+
+	@Test
+	public void testGetJSONForUser(){
+		
+		String expectedJSON = "{ \"_id\" : \"queue\" , \"name\" : \"queue\" , \"src\" : \"images/icons/queue.png\"}";
+		
+		testMongoResponse("user", expectedJSON);
+	}
+    
+	@Test
+	public void testGetJSONForFile(){
+		
+		String expectedJSON = "{ \"_id\" : \"queue\" , \"name\" : \"queue\" , \"src\" : \"images/icons/queue.png\"}";
+		
+		testMongoResponse("file", expectedJSON);
+	}
+    
 	@Test
 	public void testGetJSONForQueue(){
 		
