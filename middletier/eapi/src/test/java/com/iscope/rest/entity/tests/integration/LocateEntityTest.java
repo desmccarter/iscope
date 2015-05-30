@@ -43,7 +43,7 @@ public class LocateEntityTest {
 			e.printStackTrace();
 		}
 		
-		db.getEntityByName("database");
+		db.getEntityByName(request);
 	     
 		locateEntity.setDB(db);
 		
