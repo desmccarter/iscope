@@ -43,4 +43,16 @@ public class EntityMongoTest {
 		
 		Assert.assertEquals(expectedJson, json);
 	}
+	
+	@Test
+	public void getFileJSON() {
+	
+		String json = entityMongo.getEntityByName("file");
+		
+		// *** this should fail as it stands ...
+		String expectedJson =
+				"{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"username\" : \"\" , \"password\" : \"\" , \"domain\" : \"DOMAIN\"}]}";
+		
+		Assert.assertEquals(expectedJson, json);
+	}
 }
