@@ -19,7 +19,7 @@ public class Main {
 	 * @throws UnknownHostException 
 	 */
 	public static void main(String[] args) throws UnknownHostException {
-		//createEntityEntries();
+		createEntityEntries();
 	}
 	
 	private static void createEntityEntries(){
@@ -38,6 +38,10 @@ public class Main {
 			inputsList.add(new BasicDBObject("username","").append("password", "").append("domain", "DOMAIN"));
 			
 			record.put("inputs", inputsList);
+
+			entityDb.insertEntity("user", "images/icons/user.jpg");
+			
+			entityDb.insertEntity("web", "images/icons/web.jpg");
 			
 			entityDb.insertEntity("database",record);
 			
