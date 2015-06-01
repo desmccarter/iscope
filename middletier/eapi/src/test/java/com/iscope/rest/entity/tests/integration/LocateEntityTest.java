@@ -17,19 +17,27 @@ public class LocateEntityTest {
     private final LocateEntity locateEntity = new LocateEntity();
 
 	@Test
-	public void testGetJSONForUser(){
+	public void testGetJSONForService(){
 		
-		String expectedJSON = "{ \"_id\" : \"queue\" , \"name\" : \"queue\" , \"src\" : \"images/icons/queue.png\"}";
+		String expectedJSON = "{ \"_id\" : \"service\" , \"name\" : \"service\" , \"src\" : \"images/icons/service.png\"}";
 		
-		testMongoResponse("user", expectedJSON);
+		testMongoResponse("service", expectedJSON);
 	}
     
 	@Test
 	public void testGetJSONForFile(){
 		
-		String expectedJSON = "{ \"_id\" : \"queue\" , \"name\" : \"queue\" , \"src\" : \"images/icons/queue.png\"}";
+		String expectedJSON = "{ \"_id\" : \"file\" , \"name\" : \"file\" , \"src\" : \"images/icons/fileserver.png\"}";
 		
 		testMongoResponse("file", expectedJSON);
+	}
+    
+	@Test
+	public void testGetJSONForApi(){
+		
+		String expectedJSON = "{ \"_id\" : \"api\" , \"name\" : \"api\" , \"src\" : \"images/icons/api.png\"}";
+		
+		testMongoResponse("api", expectedJSON);
 	}
     
 	@Test
