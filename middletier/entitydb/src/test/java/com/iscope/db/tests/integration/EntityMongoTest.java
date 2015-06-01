@@ -16,7 +16,7 @@ import com.mongodb.MongoClient;
 
 public class EntityMongoTest {
 	
-	private static EntityMongo entityMongo = null;
+	private EntityMongo entityMongo = null;
 	
 	@Before 
 	public void setup(){
@@ -49,7 +49,6 @@ public class EntityMongoTest {
 	
 		String json = entityMongo.getEntityByName("file");
 		
-		// *** this should fail as it stands ...
 		String expectedJson =
 				"{ \"_id\" : \"file\" , \"name\" : \"file\" , \"src\" : \"images/icons/fileserver.png\"}";
 		
@@ -61,7 +60,6 @@ public class EntityMongoTest {
 	
 		String json = entityMongo.getEntityByName("user");
 		
-		// *** this should fail as it stands ...
 		String expectedJson =
 				"{ \"_id\" : \"user\" , \"name\" : \"user\" , \"src\" : \"images/icons/user.jpg\"}";
 		
@@ -73,7 +71,6 @@ public class EntityMongoTest {
 	
 		String json = entityMongo.getEntityByName("queue");
 		
-		// *** this should fail as it stands ...
 		String expectedJson =
 				"{ \"_id\" : \"queue\" , \"name\" : \"queue\" , \"src\" : \"images/icons/queue.png\"}";
 		
@@ -85,7 +82,6 @@ public class EntityMongoTest {
 	
 		String json = entityMongo.getEntityByName("service");
 		
-		// *** this should fail as it stands ...
 		String expectedJson =
 				"{ \"_id\" : \"service\" , \"name\" : \"service\" , \"src\" : \"images/icons/service.png\"}";
 		
@@ -97,7 +93,6 @@ public class EntityMongoTest {
 	
 		String json = entityMongo.getEntityByName("api");
 		
-		// *** this should fail as it stands ...
 		String expectedJson =
 				"{ \"_id\" : \"api\" , \"name\" : \"api\" , \"src\" : \"images/icons/api.png\"}";
 		
