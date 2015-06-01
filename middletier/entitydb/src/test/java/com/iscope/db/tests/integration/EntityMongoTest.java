@@ -51,7 +51,7 @@ public class EntityMongoTest {
 		
 		// *** this should fail as it stands ...
 		String expectedJson =
-				"{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"username\" : \"\" , \"password\" : \"\" , \"domain\" : \"DOMAIN\"}]}";
+				"{ \"_id\" : \"file\" , \"name\" : \"file\" , \"src\" : \"images/icons/fileserver.png\"}";
 		
 		Assert.assertEquals(expectedJson, json);
 	}
