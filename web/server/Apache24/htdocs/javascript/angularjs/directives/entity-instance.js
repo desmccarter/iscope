@@ -373,16 +373,27 @@ app.directive("entityInstance", function($compile,$document){
                         
                         if(targetEntityInstance!=null)
                         {
-                            entityInstance.entityLineTargetInstances.push(targetEntityInstance);
-                            targetEntityInstance.instance.entityLineSourceInstances.push(entityInstance);
+                            entityInstance.entityLineTargetInstances.push(
+                                {
+                                    lineId: lineDivElem.id,
+                                    instance: targetEntityInstance.instance
+                                }
+                            );
                             
-                            console.log("source="+entityInstance.viewData.id+" target="+targetEntityInstance.instance.viewData.id);
+                            targetEntityInstance.instance.entityLineSourceInstances.push(
+                                {
+                                    lineId: lineDivElem.id,
+                                    instance: entityInstance
+                                }
+                            );
+                            
+                            console.log("lineDivElem.id="+lineDivElem.id);
                             
                             var elink = scope.addEntityLink(lineDivElem.id, 
-                                            startLineX, 
-                                            startLineY, 
-                                            targetEntityInstance.xPositionInContainer,
-                                            targetEntityInstance.yPositionInContainer,
+                                            entityInstance.viewData.xPos, 
+                                            entityInstance.viewData.yPos, 
+                                            targetEntityInstance.instance.viewData.xPos,
+                                            targetEntityInstance.instance.viewData.yPos,
                                             angle,
                                             entityInstanceId,
                                             targetEntityInstance.instance.viewData.id
