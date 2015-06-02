@@ -179,16 +179,6 @@ app.directive("entityInstance", function($compile,$document){
                 entityInstance.viewData.xPos=startElementX;
                 entityInstance.viewData.yPos=startElementY;
                 
-                /*var entityPositionData =
-                    {
-                        id: entityInstanceId,
-                        xPositionInContainer: startElementX,
-                        yPositionInContainer: startElementY,
-                        startMouseX: 0,
-                        startMouseY: 0,
-                        instance: entityInstance
-                    };*/
-
                 idsRendered.push(entityInstance);
                 
                 var newElem=null;
@@ -198,9 +188,7 @@ app.directive("entityInstance", function($compile,$document){
                         "<p>"+entityInstanceId+"</p><br><img src=\""+imageSrc+"\" class=\"entityImg\"/><br>"+
                     "</div>";
 
-                var mainDivElem = $compile(mainDivHtmlValue)(scope);
-
-                element.append(mainDivElem);
+                element.append($compile(mainDivHtmlValue)(scope));
                 
                 var inputDivHtmlValue =
                     "<div ng-show=\"getEntityInputsById(\'"+entityId+"\')!=null\" id=\""+entityInstanceId+"Inputs\" class=\"entityInstanceInputs\">"+
@@ -208,9 +196,7 @@ app.directive("entityInstance", function($compile,$document){
                         "<img ng-show=\"(showSaveImage(\'"+entityInstanceId+"\'))\" src=\"images/icons/save.ico\" height=\"20\" width=\"20\">"+
                     "</div>"; 
 
-                var inputDivElem = $compile(inputDivHtmlValue)(scope);
-
-                element.append(inputDivElem);
+                element.append($compile(inputDivHtmlValue)(scope));
                 
                 var mouseMoved=false;
                 
@@ -266,7 +252,7 @@ app.directive("entityInstance", function($compile,$document){
 
                             if( timeDiff > 0.5 )
                             {                            
-                                var lineId=entityInstanceId+"Line"+linkIncr; ++linkIncr;
+                                var lineId=entityInstance.viewData.id+"Line"+linkIncr; ++linkIncr;
                                 var lineStartPointId=lineId+"Point";
 
                                 if(lineDivElem==null)
@@ -324,20 +310,22 @@ app.directive("entityInstance", function($compile,$document){
                                         var fromY=entityInstance.entityLineSourceInstances[x].instance.viewData.yPos;
 
                                         moveEntityLink(lid,fromX,fromY,i,j);
+                                        
+                                        console.log("fromX="+fromX+"fromY="+fromY);
                                     }
                                 }
-                                
+                                                                
                                 // *** move entity instance ...
-                                $( "#"+entityInstanceId ).css({
-                                position: 'absolute',
-                                top: entityInstance.viewData.yPos + 'px',
-                                left: entityInstance.viewData.xPos + 'px'
+                                $( "#"+entityInstance.viewData.id ).css({
+                                    position: 'absolute',
+                                    top: entityInstance.viewData.yPos + 'px',
+                                    left: entityInstance.viewData.xPos + 'px'
                                 });
 
-                                $( "#"+entityInstanceId+"Inputs" ).css({
-                                position: 'absolute',
-                                top: (entityInstance.viewData.yPos+inputYOffset) + 'px',
-                                left: (entityInstance.viewData.xPos+inputXOffset) + 'px'
+                                $( "#"+entityInstance.viewData.id+"Inputs" ).css({
+                                    position: 'absolute',
+                                    top: (entityInstance.viewData.yPos+inputYOffset) + 'px',
+                                    left: (entityInstance.viewData.xPos+inputXOffset) + 'px'
                                 });
                             }            
                         }
@@ -345,6 +333,9 @@ app.directive("entityInstance", function($compile,$document){
                 }
 
                 function mup(e) {
+                    
+                    var mouseMoveDeltaX=(e.clientX-container.left)-startMouseX;
+                    var mouseMoveDeltaY=(e.clientY-container.top)-startMouseY;
                     
                     if(timeDiff<=0.5)
                     {                        
@@ -356,15 +347,12 @@ app.directive("entityInstance", function($compile,$document){
                     
                         entityInstance.viewData.yPos=j;
                         entityInstance.viewData.xPos=i;
-                    
-                        $document.unbind('mousemove', mmove);
-                        $document.unbind('mouseup', mup);
                     }
                     else
                     if(lineDivElem!=null)
                     {   
                         var targetEntityInstance = 
-                            getTargetEntityInstance(entityInstanceId,(e.clientX-container.left),(e.clientY-container.top),e);
+                            getTargetEntityInstance(entityInstance.id,(e.clientX-container.left),(e.clientY-container.top),e);
                         
                         if(targetEntityInstance!=null)
                         {
@@ -396,14 +384,17 @@ app.directive("entityInstance", function($compile,$document){
                         }
                     }
                     
+                    $document.unbind('mousemove', mmove);
+                    $document.unbind('mouseup', mup);
+                    
                     dateOnMouseDown=null;
                     timeDiff=0;
                     lineDivElem=null;
                   }
 
-                $( "#"+entityInstanceId ).on( "mousedown", function(e) {
+                $( "#"+entityInstance.viewData.id ).on( "mousedown", function(e) {
                     e.preventDefault();
-
+                    
                     dateOnMouseDown = new Date();
                     dateOnMouseMove = null;
 
