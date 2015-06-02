@@ -49,7 +49,90 @@ app.directive("entityInstance", function($compile,$document){
     var instanceCount=0;
     
     var linkFunction = function(scope, element, attr){
-    
+
+        function getPythagLength(xstart,ystart,xto,yto){
+
+            var len = Math.sqrt(
+                ( xto - xstart) 
+                * ( xto - xstart) 
+                + ( yto - ystart) 
+                * ( yto - ystart));
+
+            return len;
+        }
+
+        function getEntityLinkAngle(xfrom, yfrom, xto, yto, len){
+
+            var ang = 180 / 3.14 * Math.acos((yto - yfrom) / len);
+
+            // Negate the angle if mouse pointer is to the right of the origin point
+            if( (xto) > (xfrom))
+                ang *= -1;
+
+            return ang;
+        }
+
+        function rotateEntityLink(id, ang) {
+            $('#'+id)
+                .css('-webkit-transform', 'rotate(' + ang + 'deg)')
+                .css('-moz-transform', 'rotate(' + ang + 'deg)')
+                .css('-o-transform', 'rotate(' + ang + 'deg)')
+                .css('-ms-transform', 'rotate(' + ang + 'deg)')
+                .css('transform', 'rotate(' + ang + 'deg)');    
+        }
+        
+        function moveEntityLink(entityLinkId, x, y, tox, toy) {
+
+            var len = getPythagLength(x,y,tox,toy);
+
+            $( "#"+entityLinkId ).css({
+                position: 'absolute',
+                height: len,
+                top: y + 'px',
+                left: x + 'px'
+                });
+
+            $( "#"+entityLinkId+"Point" ).css({
+                position: 'absolute',
+                top: ( y-($( "#"+entityLinkId+"Point" ).height()/2) ) + 'px',
+                left: ( x-($( "#"+entityLinkId+"Point" ).width()/2) ) + 'px'
+                });
+
+            var ang = getEntityLinkAngle(x,y,tox,toy,len);
+
+            rotateEntityLink(entityLinkId,ang);
+        }
+                
+        function renderEntityLink(lineId, x, y, e){
+
+            var len = Math.sqrt(
+                ( (e.clientX-container.left) - x) 
+                * ( (e.clientX-container.left) - x) 
+                + ( (e.clientY-container.top) - y) 
+                * ( (e.clientY-container.top) - y));
+
+            $( "#"+lineId ).css({
+                position: 'absolute',
+                height: len,
+                top: y + 'px',
+                left: x + 'px'
+                });
+
+            var ang = 180 / 3.14 * Math.acos(((e.clientY-container.top) - y) / len);
+
+            // Negate the angle if mouse pointer is to the right of the origin point
+            if( (e.clientX-container.left) > (x))
+                ang *= -1;
+
+            $('#'+lineId)
+                .css('-webkit-transform', 'rotate(' + ang + 'deg)')
+                .css('-moz-transform', 'rotate(' + ang + 'deg)')
+                .css('-o-transform', 'rotate(' + ang + 'deg)')
+                .css('-ms-transform', 'rotate(' + ang + 'deg)')
+                .css('transform', 'rotate(' + ang + 'deg)');
+        }
+
+        
         scope.$watchCollection('entityInstances', function(newInstances, oldInstances) {
      
             var getNewEntityInstance = function(newEntityInstances,oldEntityInstances){
@@ -160,88 +243,6 @@ app.directive("entityInstance", function($compile,$document){
                     }
                     
                     return targetEntityInstance;
-                }
-                
-                function getPythagLength(xstart,ystart,xto,yto){
-                
-                    var len = Math.sqrt(
-                        ( xto - xstart) 
-                        * ( xto - xstart) 
-                        + ( yto - ystart) 
-                        * ( yto - ystart));
-                
-                    return len;
-                }
-                
-                function getEntityLinkAngle(xfrom, yfrom, xto, yto, len){
-                
-                    var ang = 180 / 3.14 * Math.acos((yto - yfrom) / len);
-
-                    // Negate the angle if mouse pointer is to the right of the origin point
-                    if( (xto) > (xfrom))
-                        ang *= -1;
-                    
-                    return ang;
-                }
-                
-                function rotateEntityLink(id, ang) {
-                    $('#'+id)
-                        .css('-webkit-transform', 'rotate(' + ang + 'deg)')
-                        .css('-moz-transform', 'rotate(' + ang + 'deg)')
-                        .css('-o-transform', 'rotate(' + ang + 'deg)')
-                        .css('-ms-transform', 'rotate(' + ang + 'deg)')
-                        .css('transform', 'rotate(' + ang + 'deg)');    
-                }
-
-                function moveEntityLink(entityLinkId, x, y, tox, toy) {
-                    
-                    var len = getPythagLength(x,y,tox,toy);
-                    
-                    $( "#"+entityLinkId ).css({
-                        position: 'absolute',
-                        height: len,
-                        top: y + 'px',
-                        left: x + 'px'
-                        });
-                    
-                    $( "#"+entityLinkId+"Point" ).css({
-                        position: 'absolute',
-                        top: ( y-($( "#"+entityLinkId+"Point" ).height()/2) ) + 'px',
-                        left: ( x-($( "#"+entityLinkId+"Point" ).width()/2) ) + 'px'
-                        });
-
-                    var ang = getEntityLinkAngle(x,y,tox,toy,len);
-
-                    rotateEntityLink(entityLinkId,ang);
-                }
-                
-                function renderEntityLink(lineId, x, y, e){
-                    
-                    var len = Math.sqrt(
-                        ( (e.clientX-container.left) - x) 
-                        * ( (e.clientX-container.left) - x) 
-                        + ( (e.clientY-container.top) - y) 
-                        * ( (e.clientY-container.top) - y));
-                    
-                    $( "#"+lineId ).css({
-                        position: 'absolute',
-                        height: len,
-                        top: y + 'px',
-                        left: x + 'px'
-                        });
-
-                    var ang = 180 / 3.14 * Math.acos(((e.clientY-container.top) - y) / len);
-
-                    // Negate the angle if mouse pointer is to the right of the origin point
-                    if( (e.clientX-container.left) > (x))
-                        ang *= -1;
-
-                    $('#'+lineId)
-                        .css('-webkit-transform', 'rotate(' + ang + 'deg)')
-                        .css('-moz-transform', 'rotate(' + ang + 'deg)')
-                        .css('-o-transform', 'rotate(' + ang + 'deg)')
-                        .css('-ms-transform', 'rotate(' + ang + 'deg)')
-                        .css('transform', 'rotate(' + ang + 'deg)');
                 }
                 
                 function mmove(e) {
@@ -425,10 +426,7 @@ app.directive("entityInstance", function($compile,$document){
                 
                 viewData.currentWidth=width;
                 viewData.currentHeight=height;
-            
-                //viewData.yPos=mainDivElem.offsetTop;
-                //viewData.xPos=mainDivElem.offsetLef;
-                
+                            
                 $("#"+entityInstanceId).css(
                     {
                         top: entityInstance.viewData.yPos, 
