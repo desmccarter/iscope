@@ -38,7 +38,7 @@ var entityInputs = [];
                     entityInputs.push(
                         { 
                             id: id, 
-                            inputs: entityData.inputs 
+                            inputs: angular.copy(entityData.inputs) 
                         });
                     
                     viewData.entityInputsExpanded=true;
