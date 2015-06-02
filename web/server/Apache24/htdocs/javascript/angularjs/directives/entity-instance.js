@@ -8,9 +8,9 @@ app.directive("entityInstance", function($compile,$document){
         
         for(var i=0; i<idsRendered.length; i++)
         {
-            if(idsRendered[i].id==id)
+            if(idsRendered[i].viewData.id==id)
             {
-                ret=idsRendered[i].instance.viewData; break;
+                ret=idsRendered[i].viewData; break;
             }
         }
         
@@ -72,7 +72,6 @@ app.directive("entityInstance", function($compile,$document){
 
                 var viewData=entityInstance.viewData;
 
-       
                 var entityId=entityInstance.viewData.id;
 
                 var entityInstanceId=entityInstance.viewData.id;
@@ -94,7 +93,10 @@ app.directive("entityInstance", function($compile,$document){
                 
                 var linkIncr=0;
                 
-                var entityPositionData =
+                entityInstance.viewData.xPos=startElementX;
+                entityInstance.viewData.yPos=startElementY;
+                
+                /*var entityPositionData =
                     {
                         id: entityInstanceId,
                         xPositionInContainer: startElementX,
@@ -102,9 +104,9 @@ app.directive("entityInstance", function($compile,$document){
                         startMouseX: 0,
                         startMouseY: 0,
                         instance: entityInstance
-                    };
+                    };*/
 
-                idsRendered.push(entityPositionData);
+                idsRendered.push(entityInstance);
                 
                 var newElem=null;
                 
@@ -144,14 +146,14 @@ app.directive("entityInstance", function($compile,$document){
                     
                     for(var i=0; i<ei.length; i++)
                     {
-                        var tElem=$("#"+ei[i].id);
+                        var tElem=$("#"+ei[i].viewData.id);
                         
                         var width=tElem.width();
                         var height=tElem.height();
                         
-                        if( (sourceId!=ei[i].id) && 
-                           (x>=ei[i].xPositionInContainer) && (x<=(ei[i].xPositionInContainer+width)) && 
-                           (y>=ei[i].yPositionInContainer) && (y<=(ei[i].yPositionInContainer+height)) )
+                        if( (sourceId!=ei[i].viewData.id) && 
+                           (x>=ei[i].viewData.xPos) && (x<=(ei[i].viewData.xPos+width)) && 
+                           (y>=ei[i].viewData.yPos) && (y<=(ei[i].viewData.yPos+height)) )
                         {
                             targetEntityInstance=ei[i]; break;
                         }
@@ -297,52 +299,44 @@ app.directive("entityInstance", function($compile,$document){
                             }
                             else
                             {                               
-                                entityPositionData.yPositionInContainer=entityPositionData.instance.viewData.yPos=j;
-                                entityPositionData.xPositionInContainer=entityPositionData.instance.viewData.xPos=i;
+                                entityInstance.viewData.yPos=j;
+                                entityInstance.viewData.xPos=i;
 
-                                var elinks=scope.getEntityLinksBySourceId(entityInstanceId);
-
-                                if(elinks.length>0)
+                                if(entityInstance.entityLineTargetInstances.length>0)
                                 {
-                                    for(var x=0; x<elinks.length; x++)
+                                    for(var x=0; x<entityInstance.entityLineTargetInstances.length; x++)
                                     {
-                                        var entityLink=elinks[x];
+                                        var lid=entityInstance.entityLineTargetInstances[x].lineId;
+                                        var toX=entityInstance.entityLineTargetInstances[x].instance.viewData.xPos;
+                                        var toY=entityInstance.entityLineTargetInstances[x].instance.viewData.yPos;
 
-                                        moveEntityLink(entityLink.id,i,j,entityLink.toX,entityLink.toY);
-
-                                        entityLink.fromX=i;
-                                        entityLink.fromY=j;
+                                        moveEntityLink(lid,i,j,toX,toY);
                                     }
                                 }
+                                
+                                if(entityInstance.entityLineSourceInstances.length>0)
+                                {
+                                    for(var x=0; x<entityInstance.entityLineSourceInstances.length; x++)
+                                    {  
+                                        var lid=entityInstance.entityLineSourceInstances[x].lineId;
+                                        var fromX=entityInstance.entityLineSourceInstances[x].instance.viewData.xPos;
+                                        var fromY=entityInstance.entityLineSourceInstances[x].instance.viewData.yPos;
 
-                                elinks=scope.getEntityLinksByTargetId(entityInstanceId);
-
-                                if(elinks.length>0)
-                                {       
-                                    for(var x=0; x<elinks.length; x++)
-                                    {
-                                        var elink=elinks[x];
-
-                                        moveEntityLink(elink.id,
-                                                   elink.fromX,
-                                                   elink.fromY,i,j);
-
-                                        elink.toX=i;
-                                        elink.toY=j;
+                                        moveEntityLink(lid,fromX,fromY,i,j);
                                     }
                                 }
-
+                                
                                 // *** move entity instance ...
                                 $( "#"+entityInstanceId ).css({
                                 position: 'absolute',
-                                top: entityPositionData.yPositionInContainer + 'px',
-                                left: entityPositionData.xPositionInContainer + 'px'
+                                top: entityInstance.viewData.yPos + 'px',
+                                left: entityInstance.viewData.xPos + 'px'
                                 });
 
                                 $( "#"+entityInstanceId+"Inputs" ).css({
                                 position: 'absolute',
-                                top: (entityPositionData.yPositionInContainer+inputYOffset) + 'px',
-                                left: (entityPositionData.xPositionInContainer+inputXOffset) + 'px'
+                                top: (entityInstance.viewData.yPos+inputYOffset) + 'px',
+                                left: (entityInstance.viewData.xPos+inputXOffset) + 'px'
                                 });
                             }            
                         }
@@ -359,8 +353,8 @@ app.directive("entityInstance", function($compile,$document){
                         startElementX=i;
                         startElementY=j;
                     
-                        entityPositionData.yPositionInContainer=entityPositionData.instance.viewData.yPos=j;
-                        entityPositionData.xPositionInContainer=entityPositionData.instance.viewData.xPos=i;
+                        entityInstance.viewData.yPos=j;
+                        entityInstance.viewData.xPos=i;
                     
                         $document.unbind('mousemove', mmove);
                         $document.unbind('mouseup', mup);
@@ -376,31 +370,23 @@ app.directive("entityInstance", function($compile,$document){
                             entityInstance.entityLineTargetInstances.push(
                                 {
                                     lineId: lineDivElem.id,
-                                    instance: targetEntityInstance.instance
+                                    instance: targetEntityInstance
                                 }
                             );
                             
-                            targetEntityInstance.instance.entityLineSourceInstances.push(
+                            targetEntityInstance.entityLineSourceInstances.push(
                                 {
                                     lineId: lineDivElem.id,
                                     instance: entityInstance
                                 }
                             );
-                            
-                            console.log("lineDivElem.id="+lineDivElem.id);
-                            
-                            var elink = scope.addEntityLink(lineDivElem.id, 
-                                            entityInstance.viewData.xPos, 
-                                            entityInstance.viewData.yPos, 
-                                            targetEntityInstance.instance.viewData.xPos,
-                                            targetEntityInstance.instance.viewData.yPos,
-                                            angle,
-                                            entityInstanceId,
-                                            targetEntityInstance.instance.viewData.id
-                                           );
-                            
-                            moveEntityLink(elink.id,elink.fromX,elink.fromY,elink.toX,elink.toY);
-                                               
+                                                           
+                            moveEntityLink(
+                                lineDivElem.id,
+                                entityInstance.viewData.xPos,
+                                entityInstance.viewData.yPos,
+                                targetEntityInstance.viewData.xPos,
+                                targetEntityInstance.viewData.yPos);               
                         }
                         else
                         {
@@ -440,14 +426,26 @@ app.directive("entityInstance", function($compile,$document){
                 viewData.currentWidth=width;
                 viewData.currentHeight=height;
             
-                viewData.yPos=mainDivElem.offsetTop=entityPositionData.yPositionInContainer;
-                viewData.xPos=mainDivElem.offsetLeft=entityPositionData.xPositionInContainer;
+                //viewData.yPos=mainDivElem.offsetTop;
+                //viewData.xPos=mainDivElem.offsetLef;
                 
                 $("#"+entityInstanceId).css(
-                    {top: viewData.yPos, left: viewData.xPos, position:'absolute', height: height, width: width});
+                    {
+                        top: entityInstance.viewData.yPos, 
+                        left: entityInstance.viewData.xPos, 
+                        position:'absolute', 
+                        height: height, 
+                        width: width
+                    });
                 
                 $("#"+entityInstanceId+"Inputs").css(
-                    {top: viewData.yPos+inputYOffset, left: viewData.xPos+inputXOffset, position:'absolute', height: height, width: width});
+                    {
+                        top: entityInstance.viewData.yPos+inputYOffset, 
+                        left: entityInstance.viewData.xPos+inputXOffset, 
+                        position:'absolute', 
+                        height: height, 
+                        width: width
+                    });
             }
         });
         
