@@ -144,8 +144,6 @@ app.directive("entityDraggable", function($document,$interpolate,$compile) {
 
             var entityId=$interpolate(elem[0].id)(scope);
             
-            console.log("entity id="+elem[0].parentElement.className);
-            
             cloneEntity(entityId,elem[0],elem[0].offsetLeft,elem[0].offsetTop);
         }
     }
