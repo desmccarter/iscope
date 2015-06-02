@@ -2,6 +2,30 @@ app.directive("entityInstance", function($compile,$document){
 
     var idsRendered = [];
         
+    function getTargetEntityInstance(sourceId, x, y, e){
+
+        var ei = idsRendered;
+
+        var targetEntityInstance = null;
+
+        for(var i=0; i<ei.length; i++)
+        {
+            var tElem=$("#"+ei[i].viewData.id);
+
+            var width=tElem.width();
+            var height=tElem.height();
+
+            if( (sourceId!=ei[i].viewData.id) && 
+               (x>=ei[i].viewData.xPos) && (x<=(ei[i].viewData.xPos+width)) && 
+               (y>=ei[i].viewData.yPos) && (y<=(ei[i].viewData.yPos+height)) )
+            {
+                targetEntityInstance=ei[i]; break;
+            }
+        }
+
+        return targetEntityInstance;
+    }
+    
     var getViewData = function(id){
     
         var ret=null;
@@ -198,39 +222,12 @@ app.directive("entityInstance", function($compile,$document){
 
                 element.append($compile(inputDivHtmlValue)(scope));
                 
-                var mouseMoved=false;
-                
                 var dateOnMouseDown=null;
                 var dateOnMouseMove=null;
                 var timeDiff=0;
                 var lineDivElem=null;
                 var lineDivStartPointElem=null;
-                var angle=0;
 
-                function getTargetEntityInstance(sourceId, x, y, e){
-                    
-                    var ei = idsRendered;
-                    
-                    var targetEntityInstance = null;
-                    
-                    for(var i=0; i<ei.length; i++)
-                    {
-                        var tElem=$("#"+ei[i].viewData.id);
-                        
-                        var width=tElem.width();
-                        var height=tElem.height();
-                        
-                        if( (sourceId!=ei[i].viewData.id) && 
-                           (x>=ei[i].viewData.xPos) && (x<=(ei[i].viewData.xPos+width)) && 
-                           (y>=ei[i].viewData.yPos) && (y<=(ei[i].viewData.yPos+height)) )
-                        {
-                            targetEntityInstance=ei[i]; break;
-                        }
-                    }
-                    
-                    return targetEntityInstance;
-                }
-                
                 function mmove(e) {
 
                     var mouseMoveDeltaX=(e.clientX-container.left)-startMouseX;
@@ -309,10 +306,7 @@ app.directive("entityInstance", function($compile,$document){
                                         var fromX=entityInstance.entityLineSourceInstances[x].instance.viewData.xPos;
                                         var fromY=entityInstance.entityLineSourceInstances[x].instance.viewData.yPos;
 
-                                        moveEntityLink(lid,fromX,fromY,i,j);
-                                        
-                                        console.log("fromX="+fromX+"fromY="+fromY);
-                                    }
+                                        moveEntityLink(lid,fromX,fromY,i,j);                                    }
                                 }
                                                                 
                                 // *** move entity instance ...
