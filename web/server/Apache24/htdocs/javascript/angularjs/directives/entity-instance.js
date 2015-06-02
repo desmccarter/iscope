@@ -247,7 +247,10 @@ app.directive("entityInstance", function($compile,$document){
                     i=startElementX+((e.clientX-container.left)-startMouseX);
                     j=startElementY+((e.clientY-container.top)-startMouseY);
                 
-                    if(dateOnMouseDown!= null)
+                    console.log("start(x,y)=("+startMouseX+","+startMouseY+")");
+                    console.log("end(x,y)=("+(e.clientX-container.left)+","+(e.clientY-container.top)+")");
+                    
+                    if( (dateOnMouseDown!= null) )
                     {
                         if( (timeDiff==0) )
                         {
@@ -256,7 +259,7 @@ app.directive("entityInstance", function($compile,$document){
                         }
 
                         if( timeDiff > 0.5 )
-                        {
+                        {                            
                             var lineId=entityInstanceId+"Line"+linkIncr; ++linkIncr;
                             var lineStartPointId=lineId+"Point";
                             
@@ -343,7 +346,10 @@ app.directive("entityInstance", function($compile,$document){
                   }
 
                 function mup(e) {
-                                        
+                    
+                    //startMouseX=e.clientX-container.left;
+                    //startMouseY=e.clientY-container.top;
+                    
                     if(timeDiff<=0.5)
                     {                        
                         i=startElementX+((e.clientX-container.left)-startMouseX);
@@ -351,9 +357,6 @@ app.directive("entityInstance", function($compile,$document){
                     
                         startElementX=i;
                         startElementY=j;
-                                            
-                        startMouseX=e.clientX-container.left;
-                        startMouseY=e.clientY-container.top;
                     
                         entityPositionData.yPositionInContainer=entityPositionData.instance.viewData.yPos=j;
                         entityPositionData.xPositionInContainer=entityPositionData.instance.viewData.xPos=i;
@@ -396,18 +399,18 @@ app.directive("entityInstance", function($compile,$document){
 
                 $( "#"+entityInstanceId ).on( "mousedown", function(e) {
                     e.preventDefault();
-
+                    console.log("mousedown: "+entityInstanceId);
                     dateOnMouseDown = new Date();
                     dateOnMouseMove = null;
                     timeDiff=0;
                     lineDivElem=null;
                     lineDivStartPointElem=null;
                     
-                    if( (startMouseX==0) && (startMouseY==0) )
-                    {
+                    //if( (startMouseX==0) && (startMouseY==0) )
+                    //{
                         startMouseX=e.clientX-container.left;
                         startMouseY=e.clientY-container.top;
-                    }
+                    //}
                     
                     startLineX=startElementX;
                     startLineY=startElementY;
