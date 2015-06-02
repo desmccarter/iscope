@@ -172,6 +172,8 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
         }
     }
     
+    $scope.instanceCount=0;
+    
     $scope.processEntityPosition = function(entityId,elem,x, y, width, height){
         
         var containerId=null;
@@ -215,13 +217,17 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
                 
                 var entityClass = $scope.getEntityClass(entityId);
                 
+                $scope.instanceCount++;
+                
+                var instanceId=entityClass.name+"Instance"+$scope.instanceCount
+                
                 $scope.createEntityInstance(
                     { 
                         container: containerId,
                         
                         viewData:
                         {
-                            id: elem.id,
+                            id: instanceId,
                             xPos : x,
                             yPos : y,
                             entityInputsExpanded: false,
@@ -233,7 +239,11 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
                             currentHeight: 0,
                         },
                         
-                        entityData : entityClass 
+                        entityData : entityClass,
+                        
+                        entityLineTargetInstances : [],
+                        
+                        entityLineSourceInstances : []
                     });
                 
                 $scope.$apply();
