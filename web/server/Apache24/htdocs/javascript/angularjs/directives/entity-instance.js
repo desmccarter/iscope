@@ -75,7 +75,7 @@ app.directive("entityInstance", function($compile,$document){
        
                 var entityId=entityInstance.viewData.id;
 
-                var entityInstanceId=entityInstance.viewData.id=entityId+"Instance"+(instanceCount++);
+                var entityInstanceId=entityInstance.viewData.id;
                                                        
                 // *** scope name needs to be dynamic ...
                 container = document.getElementById(entityInstance.container).getBoundingClientRect();
@@ -246,108 +246,108 @@ app.directive("entityInstance", function($compile,$document){
 
                     var mouseMoveDeltaX=(e.clientX-container.left)-startMouseX;
                     var mouseMoveDeltaY=(e.clientY-container.top)-startMouseY;
-                    
+
+                    // *** if mouse has ACTUALLY moved ...
                     if( (mouseMoveDeltaX!=0) && (mouseMoveDeltaY!=0) )
                     {
-                        
-                    i=startElementX+mouseMoveDeltaX;
-                    j=startElementY+mouseMoveDeltaY;
-                
-                    if( dateOnMouseDown!= null )
-                    {
-                        if( (timeDiff==0) )
+                        i=startElementX+mouseMoveDeltaX;
+                        j=startElementY+mouseMoveDeltaY;
+
+                        if( dateOnMouseDown!= null )
                         {
-                            dateOnMouseMove = new Date();
-                            timeDiff=(dateOnMouseMove-dateOnMouseDown)/1000;
-                        }
-
-                        if( timeDiff > 0.5 )
-                        {                            
-                            var lineId=entityInstanceId+"Line"+linkIncr; ++linkIncr;
-                            var lineStartPointId=lineId+"Point";
-                            
-                            if(lineDivElem==null)
+                            if( (timeDiff==0) )
                             {
-                                var lineHtml = 
-                                    "<div id=\""+lineId+"\" class=\"linkline\"></div>";
-
-                                lineDivElem = $compile(lineHtml)(scope);
-
-                                element.append(lineDivElem);
-                                
-                                lineDivElem.id = lineId;
-                                
-                                var lineStartPointHtml = 
-                                    "<div id=\""+lineStartPointId+"\" class=\"linklinepoint\"></div>";
-
-                                lineDivStartPointElem = $compile(lineStartPointHtml)(scope);
-                                
-                                lineDivStartPointElem.id = lineStartPointId;
-
-                                element.append(lineDivStartPointElem);
-                                           
-                                $( "#"+lineDivStartPointElem.id ).css({
-                                    position: 'absolute',
-                                    top: ( startElementY-($( "#"+lineDivStartPointElem.id ).height()/2) ) + 'px',
-                                    left: ( startElementX-($( "#"+lineDivStartPointElem.id ).width()/2) ) + 'px'
-                                    });
+                                dateOnMouseMove = new Date();
+                                timeDiff=(dateOnMouseMove-dateOnMouseDown)/1000;
                             }
-                            
-                            renderEntityLink(lineDivElem.id,startLineX,startLineY,e);
-                        }
-                        else
-                        {                               
-                            entityPositionData.yPositionInContainer=entityPositionData.instance.viewData.yPos=j;
-                            entityPositionData.xPositionInContainer=entityPositionData.instance.viewData.xPos=i;
 
-                            var elinks=scope.getEntityLinksBySourceId(entityInstanceId);
-                        
-                            if(elinks.length>0)
-                            {
-                                for(var x=0; x<elinks.length; x++)
+                            if( timeDiff > 0.5 )
+                            {                            
+                                var lineId=entityInstanceId+"Line"+linkIncr; ++linkIncr;
+                                var lineStartPointId=lineId+"Point";
+
+                                if(lineDivElem==null)
                                 {
-                                    var entityLink=elinks[x];
-                                    
-                                    moveEntityLink(entityLink.id,i,j,entityLink.toX,entityLink.toY);
-                                
-                                    entityLink.fromX=i;
-                                    entityLink.fromY=j;
-                                }
-                            }
+                                    var lineHtml = 
+                                        "<div id=\""+lineId+"\" class=\"linkline\"></div>";
 
-                            elinks=scope.getEntityLinksByTargetId(entityInstanceId);
-                                
-                            if(elinks.length>0)
-                            {       
-                                for(var x=0; x<elinks.length; x++)
+                                    lineDivElem = $compile(lineHtml)(scope);
+
+                                    element.append(lineDivElem);
+
+                                    lineDivElem.id = lineId;
+
+                                    var lineStartPointHtml = 
+                                        "<div id=\""+lineStartPointId+"\" class=\"linklinepoint\"></div>";
+
+                                    lineDivStartPointElem = $compile(lineStartPointHtml)(scope);
+
+                                    lineDivStartPointElem.id = lineStartPointId;
+
+                                    element.append(lineDivStartPointElem);
+
+                                    $( "#"+lineDivStartPointElem.id ).css({
+                                        position: 'absolute',
+                                        top: ( startElementY-($( "#"+lineDivStartPointElem.id ).height()/2) ) + 'px',
+                                        left: ( startElementX-($( "#"+lineDivStartPointElem.id ).width()/2) ) + 'px'
+                                        });
+                                }
+
+                                renderEntityLink(lineDivElem.id,startLineX,startLineY,e);
+                            }
+                            else
+                            {                               
+                                entityPositionData.yPositionInContainer=entityPositionData.instance.viewData.yPos=j;
+                                entityPositionData.xPositionInContainer=entityPositionData.instance.viewData.xPos=i;
+
+                                var elinks=scope.getEntityLinksBySourceId(entityInstanceId);
+
+                                if(elinks.length>0)
                                 {
-                                    var elink=elinks[x];
+                                    for(var x=0; x<elinks.length; x++)
+                                    {
+                                        var entityLink=elinks[x];
 
-                                    moveEntityLink(elink.id,
-                                               elink.fromX,
-                                               elink.fromY,i,j);
+                                        moveEntityLink(entityLink.id,i,j,entityLink.toX,entityLink.toY);
 
-                                    elink.toX=i;
-                                    elink.toY=j;
+                                        entityLink.fromX=i;
+                                        entityLink.fromY=j;
+                                    }
                                 }
-                            }
-                            
-                            // *** move entity instance ...
-                            $( "#"+entityInstanceId ).css({
-                            position: 'absolute',
-                            top: entityPositionData.yPositionInContainer + 'px',
-                            left: entityPositionData.xPositionInContainer + 'px'
-                            });
 
-                            $( "#"+entityInstanceId+"Inputs" ).css({
-                            position: 'absolute',
-                            top: (entityPositionData.yPositionInContainer+inputYOffset) + 'px',
-                            left: (entityPositionData.xPositionInContainer+inputXOffset) + 'px'
-                            });
-                        }
+                                elinks=scope.getEntityLinksByTargetId(entityInstanceId);
+
+                                if(elinks.length>0)
+                                {       
+                                    for(var x=0; x<elinks.length; x++)
+                                    {
+                                        var elink=elinks[x];
+
+                                        moveEntityLink(elink.id,
+                                                   elink.fromX,
+                                                   elink.fromY,i,j);
+
+                                        elink.toX=i;
+                                        elink.toY=j;
+                                    }
+                                }
+
+                                // *** move entity instance ...
+                                $( "#"+entityInstanceId ).css({
+                                position: 'absolute',
+                                top: entityPositionData.yPositionInContainer + 'px',
+                                left: entityPositionData.xPositionInContainer + 'px'
+                                });
+
+                                $( "#"+entityInstanceId+"Inputs" ).css({
+                                position: 'absolute',
+                                top: (entityPositionData.yPositionInContainer+inputYOffset) + 'px',
+                                left: (entityPositionData.xPositionInContainer+inputXOffset) + 'px'
+                                });
+                            }            
                         }
                     }
-                  }
+                }
 
                 function mup(e) {
                     
@@ -373,6 +373,11 @@ app.directive("entityInstance", function($compile,$document){
                         
                         if(targetEntityInstance!=null)
                         {
+                            entityInstance.entityLineTargetInstances.push(targetEntityInstance);
+                            targetEntityInstance.instance.entityLineSourceInstances.push(entityInstance);
+                            
+                            console.log("source="+entityInstance.viewData.id+" target="+targetEntityInstance.instance.viewData.id);
+                            
                             var elink = scope.addEntityLink(lineDivElem.id, 
                                             startLineX, 
                                             startLineY, 
