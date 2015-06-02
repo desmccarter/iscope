@@ -244,13 +244,16 @@ app.directive("entityInstance", function($compile,$document){
                 
                 function mmove(e) {
 
-                    i=startElementX+((e.clientX-container.left)-startMouseX);
-                    j=startElementY+((e.clientY-container.top)-startMouseY);
-                
-                    console.log("start(x,y)=("+startMouseX+","+startMouseY+")");
-                    console.log("end(x,y)=("+(e.clientX-container.left)+","+(e.clientY-container.top)+")");
+                    var mouseMoveDeltaX=(e.clientX-container.left)-startMouseX;
+                    var mouseMoveDeltaY=(e.clientY-container.top)-startMouseY;
                     
-                    if( (dateOnMouseDown!= null) )
+                    if( (mouseMoveDeltaX!=0) && (mouseMoveDeltaY!=0) )
+                    {
+                        
+                    i=startElementX+mouseMoveDeltaX;
+                    j=startElementY+mouseMoveDeltaY;
+                
+                    if( dateOnMouseDown!= null )
                     {
                         if( (timeDiff==0) )
                         {
@@ -293,7 +296,7 @@ app.directive("entityInstance", function($compile,$document){
                             renderEntityLink(lineDivElem.id,startLineX,startLineY,e);
                         }
                         else
-                        {   
+                        {                               
                             entityPositionData.yPositionInContainer=entityPositionData.instance.viewData.yPos=j;
                             entityPositionData.xPositionInContainer=entityPositionData.instance.viewData.xPos=i;
 
@@ -342,13 +345,11 @@ app.directive("entityInstance", function($compile,$document){
                             left: (entityPositionData.xPositionInContainer+inputXOffset) + 'px'
                             });
                         }
+                        }
                     }
                   }
 
                 function mup(e) {
-                    
-                    //startMouseX=e.clientX-container.left;
-                    //startMouseY=e.clientY-container.top;
                     
                     if(timeDiff<=0.5)
                     {                        
@@ -399,19 +400,17 @@ app.directive("entityInstance", function($compile,$document){
 
                 $( "#"+entityInstanceId ).on( "mousedown", function(e) {
                     e.preventDefault();
-                    console.log("mousedown: "+entityInstanceId);
+
                     dateOnMouseDown = new Date();
                     dateOnMouseMove = null;
+
                     timeDiff=0;
                     lineDivElem=null;
                     lineDivStartPointElem=null;
                     
-                    //if( (startMouseX==0) && (startMouseY==0) )
-                    //{
-                        startMouseX=e.clientX-container.left;
-                        startMouseY=e.clientY-container.top;
-                    //}
-                    
+                    startMouseX=e.clientX-container.left;
+                    startMouseY=e.clientY-container.top;
+
                     startLineX=startElementX;
                     startLineY=startElementY;
                     
