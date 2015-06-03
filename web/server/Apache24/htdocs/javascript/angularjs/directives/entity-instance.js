@@ -450,7 +450,7 @@ app.directive("entityInstance", function($compile,$document){
                 data.yPos=yPositionInContainer;
                 data.xPos=xPositionInContainer;
             
-                $("#").css(
+                $("#"+id).css(
                     {height: data.currentHeight, width:  data.currentWidth}
                 );
             }
