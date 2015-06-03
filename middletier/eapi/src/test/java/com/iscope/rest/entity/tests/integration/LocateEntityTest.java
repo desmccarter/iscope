@@ -51,7 +51,7 @@ public class LocateEntityTest {
 	@Test
 	public void testGetJSONForDatabase(){
 		
-		String expectedJSON = "{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"name\" : \"username\" , \"type\" : \"string\"} , { \"name\" : \"password\" , \"type\" : \"string\"} , { \"name\" : \"server\" , \"type\" : \"string\"}]}";
+		String expectedJSON = "{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"name\" : \"username\" , \"type\" : \"string\"} , { \"name\" : \"password\" , \"type\" : \"string\"} , { \"name\" : \"server\" , \"type\" : \"string\"} , { \"name\" : \"database type\" , \"type\" : \"string\"}]}";
 		
 		testMongoResponse("database", expectedJSON);
 	}

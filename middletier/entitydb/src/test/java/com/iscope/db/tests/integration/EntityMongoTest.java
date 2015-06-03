@@ -39,7 +39,7 @@ public class EntityMongoTest {
 		String json = entityMongo.getEntityByName("database");
 		
 		String expectedJson =
-				"{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"name\" : \"username\" , \"type\" : \"string\"} , { \"name\" : \"password\" , \"type\" : \"string\"} , { \"name\" : \"server\" , \"type\" : \"string\"}]}";
+				"{ \"_id\" : \"database\" , \"name\" : \"database\" , \"src\" : \"images/icons/database.jpg\" , \"inputs\" : [ { \"name\" : \"username\" , \"type\" : \"string\"} , { \"name\" : \"password\" , \"type\" : \"string\"} , { \"name\" : \"server\" , \"type\" : \"string\"} , { \"name\" : \"database type\" , \"type\" : \"string\"}]}";
 		
 		Assert.assertEquals(expectedJson, json);
 	}
