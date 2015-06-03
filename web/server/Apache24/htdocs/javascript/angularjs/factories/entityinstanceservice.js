@@ -19,7 +19,7 @@ var entityInputs = [];
     }
 
    this.expandDetailedEntityInstance = function(id){
-
+       
         for(var i=0; i<entityInstances.length; i++)
         {
             if(entityInstances[i].viewData.id==id)
