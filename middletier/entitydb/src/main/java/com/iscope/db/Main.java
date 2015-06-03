@@ -35,7 +35,9 @@ public class Main {
 			
 			BasicDBList inputsList = new BasicDBList();
 			
-			inputsList.add(new BasicDBObject("username","").append("password", "").append("domain", "DOMAIN"));
+			inputsList.add(new BasicDBObject("name","username").append("type", "string") );
+			inputsList.add(new BasicDBObject("name","password").append("type", "string") );
+			inputsList.add(new BasicDBObject("name","server").append("type", "string") );
 			
 			record.put("inputs", inputsList);
 
