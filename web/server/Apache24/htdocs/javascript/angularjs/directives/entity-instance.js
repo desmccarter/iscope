@@ -217,7 +217,11 @@ app.directive("entityInstance", function($compile,$document){
                 var inputDivHtmlValue =
                     "<div ng-show=\"getEntityInputsById(\'"+entityId+"\')!=null\" id=\""+entityInstanceId+"Inputs\" class=\"entityInstanceInputs\">"+
                         "<entity-inputs id=\""+entityInstanceId+"\" inputs=\"getEntityInputsById(\'"+entityId+"\')\"></entity-inputs><br>"+
-                        "<img ng-show=\"(showSaveImage(\'"+entityInstanceId+"\'))\" src=\"images/icons/save.ico\" height=\"20\" width=\"20\">"+
+            
+                        "<div ng-show=\"(showSaveImage(\'"+entityInstanceId+"\'))\" class=\"btn-group btn-group-justified\" role=\"group\">"+
+                          "<button type=\"button\" class=\"btn btn-primary btn-sm\">Add field</button>"+
+                          "<button type=\"button\" class=\"btn btn-primary btn-sm\">Make comment</button>"+
+                        "</div>"+
                     "</div>"; 
 
                 element.append($compile(inputDivHtmlValue)(scope));

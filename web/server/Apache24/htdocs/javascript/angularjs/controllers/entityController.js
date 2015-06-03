@@ -12,6 +12,11 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
     
     $scope.testVar="test is a test";
     
+    $scope.scopeHasEntityInstances = function() {
+    
+        return $scope.entityInstances.length>0;
+    }
+    
     $scope.getAllEntities = function() {
         
         $scope.entities=entityservice.getAllEntities();

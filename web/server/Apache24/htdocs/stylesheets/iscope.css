@@ -104,7 +104,7 @@ body #container #header #headermenu ul li {
     z-index: 2;
     position: absolute;
     font-size: 10px;
-    text-align: center;
+    text-align: left;
 }
 
 .entityImg {
