@@ -4,7 +4,10 @@ app.directive("entityInputs", function($compile){
         
         var htmlValue = 
                     "<div ng-repeat=\"input in inputs(id).inputs\" class=\"input-group\">"+
-                        "<input class=\"form-control\" placeholder=\"{{input.name}}\" aria-describedby=\"basic-addon1\" id=\"{{input.name}}_input\" type=\'text\' ng-model=\"input.value\"></input>"+
+                        "<div class=\"col-xs-50\">"+
+                            "<input class=\"form-control\" placeholder=\"{{input.name}}\" aria-describedby=\"basic-addon1\" id=\"{{input.name}}_input\" type=\'text\' ng-model=\"input.value\">"+
+                            "</input>"+
+                        "</div>"+
                     "</div>"; 
 
         /*

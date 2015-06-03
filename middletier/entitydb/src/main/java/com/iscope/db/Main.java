@@ -38,6 +38,7 @@ public class Main {
 			inputsList.add(new BasicDBObject("name","username").append("type", "string") );
 			inputsList.add(new BasicDBObject("name","password").append("type", "string") );
 			inputsList.add(new BasicDBObject("name","server").append("type", "string") );
+			inputsList.add(new BasicDBObject("name","database type").append("type", "string") );
 			
 			record.put("inputs", inputsList);
 
