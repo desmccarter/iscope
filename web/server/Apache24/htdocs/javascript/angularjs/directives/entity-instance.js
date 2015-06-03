@@ -209,20 +209,41 @@ app.directive("entityInstance", function($compile,$document){
                 
                 var mainDivHtmlValue = 
                     "<div id=\""+entityInstanceId+"\" class=\"entityInstance\" ng-dblclick=\"expandDetailedEntityInstance(\'"+entityInstanceId+"\')\">"+
-                        "<p>"+entityInstanceId+"</p><br><img src=\""+imageSrc+"\" class=\"entityImg\"/><br>"+
+                        "<b>"+entityInstanceId+"</b><br><img src=\""+imageSrc+"\" class=\"entityImg\"/><br>"+
                     "</div>";
 
                 element.append($compile(mainDivHtmlValue)(scope));
                 
                 var inputDivHtmlValue =
                     "<div ng-show=\"getEntityInputsById(\'"+entityId+"\')!=null\" id=\""+entityInstanceId+"Inputs\" class=\"entityInstanceInputs\">"+
-                        "<entity-inputs id=\""+entityInstanceId+"\" inputs=\"getEntityInputsById(\'"+entityId+"\')\"></entity-inputs><br>"+
-            
-                        "<div ng-show=\"(showSaveImage(\'"+entityInstanceId+"\'))\" class=\"btn-group btn-group-justified\" role=\"group\">"+
-                          "<button type=\"button\" class=\"btn btn-primary btn-sm\">Add field</button>"+
-                          "<button type=\"button\" class=\"btn btn-primary btn-sm\">Make comment</button>"+
+                    
+                        "<h5><b ng-show=\"getEntityInputsById(\'"+entityId+"\')!=null\">Fields</b></h5>"+
+                        
+                        "<entity-inputs id=\""+entityInstanceId+"\" inputs=\"getEntityInputsById(\'"+entityId+"\')\">"+
+                        "</entity-inputs>"+
+                                
+                        "<br>"+
+                    
+                        "<h5><b ng-show=\"getEntityInputsById(\'"+entityId+"\')!=null\">Options</b></h5>"+
+                        
+                        "<div class=\"container\">"+
+                            "<div class=\"btn-group\">"+
+                                "<button type=\"button\" class=\"btn btn-primary btn-sm\">Connect</button>"+
+                            "</div>"+
+                        "</div>";
+                    
+                        /*"<div class=\"container\">"+
+                        "<div class=\"btn-group\">"+
+                          "<button type=\"button\" class=\"btn btn-primary\">Add field</button>"+
+                          "<button type=\"button\" class=\"btn btn-primary\">Describe</button>"+
                         "</div>"+
-                    "</div>"; 
+                        "</div>"+*/
+                    
+                    /*
+                    
+
+                    
+                    */ 
 
                 element.append($compile(inputDivHtmlValue)(scope));
                 

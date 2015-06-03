@@ -87,22 +87,17 @@ body #container #header #headermenu ul li {
 }
 
 .entityInstance {
-    padding:10px;
     border:1px solid #aaaaaa;
     border-radius: 5px;
     background-color: white;
-    width: 100px;
-    position: absolute;
+    position: relative;
     font-size: 10px;
     z-index: 1;
-    text-align: center;
 }
 
 .entityInstanceInputs {
-    width: 1px;
-    height: 1px;
     z-index: 2;
-    position: absolute;
+    position: relative;
     font-size: 10px;
     text-align: left;
 }
@@ -122,7 +117,7 @@ body #container #header #headermenu ul li {
     border:1px solid #aaaaaa;
     border-radius: 5px;
     background-color: white;
-    width: 100px;
+    width: 500px;
     position: relative;
     font-size: 10px;
     text-align: center;

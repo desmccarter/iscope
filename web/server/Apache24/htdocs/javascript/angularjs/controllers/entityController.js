@@ -239,7 +239,7 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
                             minWidth: 100,
                             minHeight: 100,
                             maxWidth: 300,
-                            maxHeight: 300,
+                            maxHeight: 380,
                             currentWidth: 0,
                             currentHeight: 0,
                         },

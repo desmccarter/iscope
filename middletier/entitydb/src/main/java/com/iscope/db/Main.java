@@ -23,30 +23,21 @@ public class Main {
 	}
 	
 	private static void createEntityEntries(){
-		
-		BasicDBObject record = 
-				new BasicDBObject("_id","database").append("name","database")
-				.append("src", "images/icons/database.jpg");		
 
 		try {
 			EntityMongo entityDb = new EntityMongo();
 		
 			entityDb.removeAllEntities();
+
+			BasicDBObject webRecord = createWebRecord();
 			
-			BasicDBList inputsList = new BasicDBList();
+			entityDb.insertEntity("web",webRecord);
 			
-			inputsList.add(new BasicDBObject("name","username").append("type", "string") );
-			inputsList.add(new BasicDBObject("name","password").append("type", "string") );
-			inputsList.add(new BasicDBObject("name","server").append("type", "string") );
-			inputsList.add(new BasicDBObject("name","database type").append("type", "string") );
+			BasicDBObject databaseRecord = createDatabaseRecord();
 			
-			record.put("inputs", inputsList);
+			entityDb.insertEntity("database",databaseRecord);
 
 			entityDb.insertEntity("user", "images/icons/user.jpg");
-			
-			entityDb.insertEntity("web", "images/icons/web.jpg");
-			
-			entityDb.insertEntity("database",record);
 			
 			entityDb.insertEntity("queue", "images/icons/queue.png");
 	        
@@ -60,5 +51,37 @@ public class Main {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+	}
+
+	private static BasicDBObject createDatabaseRecord() {
+		BasicDBList databaseRecordInputsList = new BasicDBList();
+		
+		databaseRecordInputsList.add(new BasicDBObject("name","username").append("type", "string") );
+		databaseRecordInputsList.add(new BasicDBObject("name","password").append("type", "string") );
+		databaseRecordInputsList.add(new BasicDBObject("name","server").append("type", "string") );
+		databaseRecordInputsList.add(new BasicDBObject("name","database type").append("type", "string") );
+		
+		BasicDBObject databaseRecord = 
+				new BasicDBObject("_id","database").append("name","database")
+				.append("src", "images/icons/database.jpg");		
+		
+		databaseRecord.put("inputs", databaseRecordInputsList);
+		return databaseRecord;
+	}
+	
+	private static BasicDBObject createWebRecord() {
+		BasicDBList databaseRecordInputsList = new BasicDBList();
+		
+		databaseRecordInputsList.add(new BasicDBObject("name","username").append("type", "string") );
+		databaseRecordInputsList.add(new BasicDBObject("name","password").append("type", "string") );
+		databaseRecordInputsList.add(new BasicDBObject("name","server").append("type", "string") );
+		databaseRecordInputsList.add(new BasicDBObject("name","webserver type").append("type", "string") );
+		
+		BasicDBObject databaseRecord = 
+				new BasicDBObject("_id","web").append("name","web")
+				.append("src", "images/icons/web.jpg");		
+		
+		databaseRecord.put("inputs", databaseRecordInputsList);
+		return databaseRecord;
 	}
 }
