@@ -11,6 +11,12 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
     $scope.entityLinks = [];
     
     $scope.testVar="test is a test";
+
+    $scope.saveEntityInstance = function() {
+        
+        entityinstanceservice.saveEntityInstance();
+    
+    }
     
     $scope.scopeHasEntityInstances = function() {
     

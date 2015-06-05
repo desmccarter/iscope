@@ -3,13 +3,17 @@ app.service("entityservice",function(){
     var restApi = "http://localhost:8082/eapi";
     
     var entities = [];
+    
+    this.getRestApi = function() {
+        return restApi;
+    }
          
     this.getAllEntities = function() {
 
         if(entities.length==0)
         {
             $.ajax({
-                url: restApi+"/getentity/all",
+                url: restApi + "/getentity/all",
                 dataType: 'json',
                 async: false,
                 success: function(data) {

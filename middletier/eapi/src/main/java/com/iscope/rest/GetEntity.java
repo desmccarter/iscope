@@ -1,12 +1,19 @@
 package com.iscope.rest;
 
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.UnknownHostException;
 
+import javax.ws.rs.Consumes;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import com.iscope.db.EntityMongo;
@@ -17,7 +24,7 @@ import com.iscope.rest.entity.LocateEntityEnum;
 public class GetEntity {
 	
 	private LocateEntity locateEntity=new LocateEntity();
-    
+	    
     @GET
     @Path("/{parameter}")
     public Response responseMsg( @PathParam("parameter") String parameter,
@@ -45,7 +52,7 @@ public class GetEntity {
     		
     		Response resp = Response.status(200).entity(output).build();    	       
     		
-    		resp.getHeaders().add("Access-Control-Allow-Origin", "http://localhost");
+    		//resp.getHeaders().add("Access-Control-Allow-Origin", "*");
     		
         	return resp;
     	}

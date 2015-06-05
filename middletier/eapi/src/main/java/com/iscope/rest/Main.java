@@ -11,7 +11,7 @@ import java.net.URI;
  * Main class.
  *
  */
-public class Main {
+public class Main extends ResourceConfig {
     // Base URI the Grizzly HTTP server will listen on
     public static final String BASE_URI = "http://localhost:8082/eapi/";
 
@@ -23,7 +23,9 @@ public class Main {
         // create a resource config that scans for JAX-RS resources and providers
         // in com.iscope.rest package
         final ResourceConfig rc = new ResourceConfig().packages("com.iscope.rest");
-
+        
+        rc.register(AllowLocalhostFilter.class);
+       
         // create and start a new instance of grizzly http server
         // exposing the Jersey application at BASE_URI
         return GrizzlyHttpServerFactory.createHttpServer(URI.create(BASE_URI), rc);

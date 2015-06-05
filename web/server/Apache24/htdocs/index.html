@@ -58,7 +58,12 @@
 
                 <div id="scope">
                     <ul class="nav nav-tabs" ng-show="scopeHasEntityInstances()">
-                      <li id="savescope" role="presentation" class="active"><a href="#">Save</a></li>
+                        <li id="savescope" role="presentation" class="active">
+                            <div class="container">
+                                <button ng-click="saveEntityInstance()" type="button" class="btn btn-primary btn-sm">Connect</button>
+                            </div>
+                        </li>
+                        
                       <li id="reloadscope" role="presentation"><a href="#">Reload</a></li>
                       <li id="clearscope" role="presentation"><a href="#">Clear</a></li>    
                     </ul>

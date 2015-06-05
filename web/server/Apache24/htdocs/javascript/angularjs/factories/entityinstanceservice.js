@@ -3,6 +3,34 @@ app.service("entityinstanceservice", [ 'entityservice', function(entityservice) 
 var entityInstances = [];
 var entityInputs = [];
     
+    this.saveEntityInstance = function() {
+        
+        $.ajax(
+            {
+                url : entityservice.getRestApi()+"/entityinstance/saveentityinstance",
+
+                type: "POST",
+
+                contentType: "application/json",
+
+                data : "{ test : \"test\" }",
+
+                dataType: "json",
+                
+                async: false,
+                
+                success: function(data) {
+                    alert("done");
+                },
+                
+                error: function(xhr, status, error) {
+                    var err = eval("(" + xhr.responseText + ")");
+                    alert("status: "+status+" error: "+error);
+                }
+            }
+        );
+    }
+    
     this.getEntityInputsById = function(id){
 
         var einputs = null;
