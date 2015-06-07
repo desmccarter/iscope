@@ -3,7 +3,7 @@ app.service("entityinstanceservice", [ 'entityservice', function(entityservice) 
 var entityInstances = [];
 var entityInputs = [];
     
-    this.saveEntityInstance = function() {
+    this.saveEntityInstances = function() {
         
         $.ajax(
             {
@@ -13,14 +13,14 @@ var entityInputs = [];
 
                 contentType: "application/json",
 
-                data : "{ test : \"test\" }",
+                data : JSON.stringify(entityInstances),
 
                 dataType: "json",
                 
                 async: false,
                 
                 success: function(data) {
-                    alert("done");
+                    alert("done"+entityInstances.length);
                 },
                 
                 error: function(xhr, status, error) {

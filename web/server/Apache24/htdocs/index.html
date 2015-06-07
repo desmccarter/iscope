@@ -57,16 +57,21 @@
                 </div>
 
                 <div id="scope">
-                    <ul class="nav nav-tabs" ng-show="scopeHasEntityInstances()">
-                        <li id="savescope" role="presentation" class="active">
-                            <div class="container">
-                                <button ng-click="saveEntityInstance()" type="button" class="btn btn-primary btn-sm">Connect</button>
-                            </div>
-                        </li>
-                        
-                      <li id="reloadscope" role="presentation"><a href="#">Reload</a></li>
-                      <li id="clearscope" role="presentation"><a href="#">Clear</a></li>    
-                    </ul>
+                    
+                    <nav class="navbar navbar-default" ng-show="scopeHasEntityInstances()">
+                      <div class="container-fluid">
+                        <div class="navbar-header">
+                          <div class="navbar-brand">Scope</div>
+                        </div>
+                        <div>
+                          <ul class="nav navbar-nav">
+                            <li><a ng-click="saveEntityInstances()" class="active">Save</a></li>
+                            <li><a ng-click="reloadEntityInstance()">Re-load</a></li> 
+                            <li><a ng-click="reloadEntityInstanceLinks()">Remove all entitylinks</a></li>
+                          </ul>
+                        </div>
+                      </div>
+                    </nav>
                     
                     <div entity-instance></div>
                 </div>

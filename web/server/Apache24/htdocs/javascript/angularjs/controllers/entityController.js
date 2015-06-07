@@ -12,9 +12,9 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
     
     $scope.testVar="test is a test";
 
-    $scope.saveEntityInstance = function() {
+    $scope.saveEntityInstances = function() {
         
-        entityinstanceservice.saveEntityInstance();
+        entityinstanceservice.saveEntityInstances();
     
     }
     
