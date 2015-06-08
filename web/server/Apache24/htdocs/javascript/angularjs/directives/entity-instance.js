@@ -185,7 +185,7 @@ app.directive("entityInstance", function($compile,$document){
                                                        
                 // *** scope name needs to be dynamic ...
                 container = document.getElementById(entityInstance.container).getBoundingClientRect();
-
+                
                 var startElementY=scope.mouse.y-container.top;
                 var startElementX=scope.mouse.x-container.left;
 
@@ -232,19 +232,6 @@ app.directive("entityInstance", function($compile,$document){
                             "</div>"+
                         "</div>";
                     
-                        /*"<div class=\"container\">"+
-                        "<div class=\"btn-group\">"+
-                          "<button type=\"button\" class=\"btn btn-primary\">Add field</button>"+
-                          "<button type=\"button\" class=\"btn btn-primary\">Describe</button>"+
-                        "</div>"+
-                        "</div>"+*/
-                    
-                    /*
-                    
-
-                    
-                    */ 
-
                 element.append($compile(inputDivHtmlValue)(scope));
                 
                 var dateOnMouseDown=null;
@@ -311,7 +298,7 @@ app.directive("entityInstance", function($compile,$document){
                                 entityInstance.viewData.yPos=j;
                                 entityInstance.viewData.xPos=i;
 
-                                if(entityInstance.entityLineTargetInstances.length>0)
+                                /*if(entityInstance.entityLineTargetInstances.length>0)
                                 {
                                     for(var x=0; x<entityInstance.entityLineTargetInstances.length; x++)
                                     {
@@ -321,9 +308,31 @@ app.directive("entityInstance", function($compile,$document){
 
                                         moveEntityLink(lid,i,j,toX,toY);
                                     }
+                                }*/
+                                
+                                var entityLinks=scope.getEntityLinksBySourceId(entityInstance.viewData.id);
+                                
+                                if(entityLinks!=null)
+                                {
+                                    console.log("number of links = "+entityLinks.length);
+                                    console.log("linkID="+entityLinks[0].linkId+" s="+entityLinks[0].sourceId+" t="+entityLinks[0].targetId+
+                                               " f(x,y)="+entityInstance.viewData.xPos+","+entityInstance.viewData.yPos);
+                                    
+                                    for(var x=0; x<entityLinks.length; x++)
+                                    {
+                                        var el=entityLinks[x];
+                                        
+                                        var entityInstanceTarget=scope.getEntityInstance(el.targetId);
+                                        
+                                        var lid=el.linkId;
+                                        var fromX=entityInstance.viewData.xPos;
+                                        var fromY=entityInstance.viewData.yPos;
+                                        
+                                        moveEntityLink(lid,fromX,fromY,entityInstanceTarget.viewData.xPos,entityInstanceTarget.viewData.yPos);
+                                    }
                                 }
                                 
-                                if(entityInstance.entityLineSourceInstances.length>0)
+                                /*if(entityInstance.entityLineSourceInstances.length>0)
                                 {
                                     for(var x=0; x<entityInstance.entityLineSourceInstances.length; x++)
                                     {  
@@ -331,8 +340,9 @@ app.directive("entityInstance", function($compile,$document){
                                         var fromX=entityInstance.entityLineSourceInstances[x].instance.viewData.xPos;
                                         var fromY=entityInstance.entityLineSourceInstances[x].instance.viewData.yPos;
 
-                                        moveEntityLink(lid,fromX,fromY,i,j);                                    }
-                                }
+                                        moveEntityLink(lid,fromX,fromY,i,j);
+                                    }
+                                }*/
                                                                 
                                 // *** move entity instance ...
                                 $( "#"+entityInstance.viewData.id ).css({
@@ -375,7 +385,9 @@ app.directive("entityInstance", function($compile,$document){
                         
                         if(targetEntityInstance!=null)
                         {
-                            entityInstance.entityLineTargetInstances.push(
+                            scope.linkEntityInstances(entityInstance.viewData.id,targetEntityInstance.viewData.id,lineDivElem.id);
+                            
+                            /*entityInstance.entityLineTargetInstances.push(
                                 {
                                     lineId: lineDivElem.id,
                                     instance: targetEntityInstance
@@ -387,7 +399,7 @@ app.directive("entityInstance", function($compile,$document){
                                     lineId: lineDivElem.id,
                                     instance: entityInstance
                                 }
-                            );
+                            );*/
                                                            
                             moveEntityLink(
                                 lineDivElem.id,

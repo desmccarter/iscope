@@ -20,7 +20,7 @@ var entityInputs = [];
                 async: false,
                 
                 success: function(data) {
-                    alert("done"+entityInstances.length);
+                    alert("done (saved "+entityInstances.length+" instances in scope)");
                 },
                 
                 error: function(xhr, status, error) {

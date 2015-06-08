@@ -12,55 +12,13 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
     
     $scope.testVar="test is a test";
 
-    $scope.saveEntityInstances = function() {
-        
-        entityinstanceservice.saveEntityInstances();
-    
-    }
-    
-    $scope.scopeHasEntityInstances = function() {
-    
-        return $scope.entityInstances.length>0;
-    }
-    
-    $scope.getAllEntities = function() {
-        
-        $scope.entities=entityservice.getAllEntities();
-                
-        return $scope.entities;
-    }
-
-    $scope.addEntityLink = function(id, fromX, fromY, toX, toY, angle, sourceId, targetId){
-        
-        var entityLink = null;
-        
-        for(var i=0; i<$scope.entityLinks.length; i++)
-        {
-            if(id==$scope.entityLinks[i].id)
+    $scope.linkEntityInstances = function(sourceId, targetId, linkId){
+        $scope.entityLinks.push(
             {
-                entityLink=$scope.entityLinks[i]; break;
-            }
-        }
-        
-        if( entityLink == null )
-        {
-            entityLink =    
-            {
-                    id: id,
-                    length: length,
-                    fromX: fromX,
-                    fromY: fromY,
-                    toX: toX,
-                    toY: toY,
-                    sourceId: sourceId,
-                    targetId: targetId,
-                    angle: angle
-            };
-            
-            $scope.entityLinks.push(entityLink);
-        }
-            
-        return entityLink;
+                sourceId: sourceId,
+                targetId: targetId,
+                linkId: linkId
+            });
     }
     
     $scope.getEntityLinksBySourceId = function(sourceId){
@@ -71,7 +29,7 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
         {
             if(sourceId==$scope.entityLinks[i].sourceId)
             {
-                entityLinks.push(entityLink=$scope.entityLinks[i]);
+                entityLinks.push($scope.entityLinks[i]);
             }
         }
                     
@@ -91,6 +49,37 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
         }
             
         return entityLink;
+    }
+    
+    $scope.getEntityInstance = function(entityInstanceId) {
+        
+        var entityInstance=null;
+        
+        for(var i=0; i<$scope.entityInstances.length; i++)
+        {
+            if($scope.entityInstances[i].viewData.id==entityInstanceId)
+            {
+                entityInstance=$scope.entityInstances[i]; break;
+            }
+        }
+        
+        return entityInstance;
+    }
+    
+    $scope.saveEntityInstances = function() {
+        entityinstanceservice.saveEntityInstances();
+    }
+    
+    $scope.scopeHasEntityInstances = function() {
+    
+        return $scope.entityInstances.length>0;
+    }
+    
+    $scope.getAllEntities = function() {
+        
+        $scope.entities=entityservice.getAllEntities();
+                
+        return $scope.entities;
     }
     
     $scope.getEntityInputsById = function(id){
@@ -139,7 +128,7 @@ app.controller('entityController', [ '$scope', 'entityservice', 'entityinstances
     }
     
     $scope.mouse = {x: 0, y: 0, event: null};
-
+    
     document.addEventListener('mousemove', function(e){ 
             $scope.mouse.x = e.clientX || e.pageX; 
             $scope.mouse.y = e.clientY || e.pageY;
