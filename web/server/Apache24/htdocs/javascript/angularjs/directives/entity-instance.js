@@ -314,10 +314,6 @@ app.directive("entityInstance", function($compile,$document){
                                 
                                 if(entityLinks!=null)
                                 {
-                                    console.log("number of links = "+entityLinks.length);
-                                    console.log("linkID="+entityLinks[0].linkId+" s="+entityLinks[0].sourceId+" t="+entityLinks[0].targetId+
-                                               " f(x,y)="+entityInstance.viewData.xPos+","+entityInstance.viewData.yPos);
-                                    
                                     for(var x=0; x<entityLinks.length; x++)
                                     {
                                         var el=entityLinks[x];
@@ -329,6 +325,24 @@ app.directive("entityInstance", function($compile,$document){
                                         var fromY=entityInstance.viewData.yPos;
                                         
                                         moveEntityLink(lid,fromX,fromY,entityInstanceTarget.viewData.xPos,entityInstanceTarget.viewData.yPos);
+                                    }
+                                }
+                                
+                                entityLinks=scope.getEntityLinksByTargetId(entityInstance.viewData.id);
+                                
+                                if(entityLinks!=null)
+                                {
+                                    for(var x=0; x<entityLinks.length; x++)
+                                    {
+                                        var el=entityLinks[x];
+                                        
+                                        var entityInstanceTarget=scope.getEntityInstance(el.sourceId);
+                                        
+                                        var lid=el.linkId;
+                                        var toX=entityInstance.viewData.xPos;
+                                        var toY=entityInstance.viewData.yPos;
+                                        
+                                        moveEntityLink(lid,entityInstanceTarget.viewData.xPos,entityInstanceTarget.viewData.yPos,toX,toY);
                                     }
                                 }
                                 
